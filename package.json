@@ -1,0 +1,26 @@
+{
+  "name": "hexait",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Monorepo HEXAIT (React + Node + PostgreSQL)",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n WEB,API -c blue,magenta \"pnpm --filter web dev\" \"pnpm --filter api dev\""
+  },
+  "keywords": [
+    "react",
+    "node",
+    "postgresql",
+    "devops",
+    "hexait"
+  ],
+  "author": "Osama Rahim",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "packageManager": "pnpm@10.15.1"
+}
