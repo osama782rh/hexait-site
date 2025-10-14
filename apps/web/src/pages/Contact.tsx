@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, Phone, MapPin, Clock, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 
-/** ==== Schéma Zod (professionnel) ==== */
+/** ==== Schéma Zod (corrigé) ==== */
 const Schema = z.object({
   // Identité
   name: z.string().min(2, "Nom trop court"),
@@ -26,33 +26,39 @@ const Schema = z.object({
     .or(z.literal(""))
     .refine((v) => !v || /^https?:\/\/.+/i.test(v), "URL invalide (https://)"),
 
-  // Projet
-  projectType: z.enum(
-    ["Nouveau produit", "Refonte", "Feature/Module", "Audit/Conseil", "Autre"],
-    { errorMap: () => ({ message: "Choisis un type de projet" }) }
-  ),
+  // Projet - CORRIGÉ : utilisation de z.enum sans errorMap
+  projectType: z.enum(["Nouveau produit", "Refonte", "Feature/Module", "Audit/Conseil", "Autre"], {
+    required_error: "Choisis un type de projet",
+    invalid_type_error: "Type de projet invalide"
+  }),
+  
   services: z
     .array(
       z.enum(["UX/UI", "Front-end", "Back-end", "Cloud/DevOps", "Sécurité", "Data/Analytics"])
     )
     .min(1, "Sélectionne au moins un service"),
-  budget: z.enum(
-    ["<5k€", "5–15k€", "15–40k€", "40–80k€", "80k€+"],
-    { errorMap: () => ({ message: "Sélectionne un budget" }) }
-  ),
-  timeline: z.enum(
-    ["ASAP (<1 mois)", "1–2 mois", "2–3 mois", "3+ mois"],
-    { errorMap: () => ({ message: "Sélectionne un délai" }) }
-  ),
+  
+  // CORRIGÉ : budget avec message d'erreur personnalisé
+  budget: z.enum(["<5k€", "5–15k€", "15–40k€", "40–80k€", "80k€+"], {
+    required_error: "Sélectionne un budget",
+    invalid_type_error: "Budget invalide"
+  }),
+  
+  // CORRIGÉ : timeline avec message d'erreur personnalisé
+  timeline: z.enum(["ASAP (<1 mois)", "1–2 mois", "2–3 mois", "3+ mois"], {
+    required_error: "Sélectionne un délai",
+    invalid_type_error: "Délai invalide"
+  }),
 
   // Message & pièces jointes
   message: z.string().min(20, "Explique-nous un peu plus ton besoin (min 20 caractères)"),
   files: z.any().optional(), // géré côté serveur
 
-  // Légal / anti-spam
-  consent: z.literal(true, {
-    errorMap: () => ({ message: "Tu dois accepter la politique de confidentialité" }),
+  // Légal / anti-spam - CORRIGÉ : z.literal avec validation booléenne
+  consent: z.boolean().refine((val) => val === true, {
+    message: "Tu dois accepter la politique de confidentialité"
   }),
+  
   // honeypot (doit rester vide)
   company_website: z.string().max(0, "Spam détecté"),
 });
@@ -72,6 +78,7 @@ export default function Contact() {
     resolver: zodResolver(Schema),
     defaultValues: {
       services: [],
+      consent: false,
     },
   });
 
@@ -112,7 +119,13 @@ export default function Contact() {
                       <li><span className="text-slate-300">Délai :</span> {submittedData.timeline}</li>
                     </ul>
                   )}
-                  <button className="btn-ghost mt-4" onClick={() => { setSubmittedData(null); reset(); }}>
+                  <button 
+                    className="btn-ghost mt-4" 
+                    onClick={() => { 
+                      setSubmittedData(null); 
+                      reset(); 
+                    }}
+                  >
                     Envoyer une autre demande
                   </button>
                 </div>
@@ -159,11 +172,11 @@ export default function Contact() {
                   <label className="text-sm text-slate-300">Type de projet *</label>
                   <select {...register("projectType")} className="field mt-1">
                     <option value="">— Sélectionner —</option>
-                    <option>Nouveau produit</option>
-                    <option>Refonte</option>
-                    <option>Feature/Module</option>
-                    <option>Audit/Conseil</option>
-                    <option>Autre</option>
+                    <option value="Nouveau produit">Nouveau produit</option>
+                    <option value="Refonte">Refonte</option>
+                    <option value="Feature/Module">Feature/Module</option>
+                    <option value="Audit/Conseil">Audit/Conseil</option>
+                    <option value="Autre">Autre</option>
                   </select>
                   {errors.projectType && <p className="error mt-1">{errors.projectType.message}</p>}
                 </div>
@@ -172,11 +185,11 @@ export default function Contact() {
                   <label className="text-sm text-slate-300">Budget cible *</label>
                   <select {...register("budget")} className="field mt-1">
                     <option value="">— Sélectionner —</option>
-                    <option>{`<5k€`}</option>
-                    <option>5–15k€</option>
-                    <option>15–40k€</option>
-                    <option>40–80k€</option>
-                    <option>80k€+</option>
+                    <option value="<5k€">{`<5k€`}</option>
+                    <option value="5–15k€">5–15k€</option>
+                    <option value="15–40k€">15–40k€</option>
+                    <option value="40–80k€">40–80k€</option>
+                    <option value="80k€+">80k€+</option>
                   </select>
                   {errors.budget && <p className="error mt-1">{errors.budget.message}</p>}
                 </div>
@@ -187,10 +200,10 @@ export default function Contact() {
                   <label className="text-sm text-slate-300">Délai souhaité *</label>
                   <select {...register("timeline")} className="field mt-1">
                     <option value="">— Sélectionner —</option>
-                    <option>ASAP (&lt;1 mois)</option>
-                    <option>1–2 mois</option>
-                    <option>2–3 mois</option>
-                    <option>3+ mois</option>
+                    <option value="ASAP (<1 mois)">ASAP (&lt;1 mois)</option>
+                    <option value="1–2 mois">1–2 mois</option>
+                    <option value="2–3 mois">2–3 mois</option>
+                    <option value="3+ mois">3+ mois</option>
                   </select>
                   {errors.timeline && <p className="error mt-1">{errors.timeline.message}</p>}
                 </div>
@@ -237,12 +250,17 @@ export default function Contact() {
 
               {/* Consentement + honeypot */}
               <div className="flex items-start gap-2">
-                <input type="checkbox" {...register("consent")} className="mt-1 accent-cyan-400" />
+                <input 
+                  type="checkbox" 
+                  {...register("consent")} 
+                  className="mt-1 accent-cyan-400" 
+                />
                 <p className="text-sm text-slate-300">
-                  J’accepte la <a href="/confidentialite" className="underline">politique de confidentialité</a> et le traitement de mes données.
+                  J'accepte la <a href="/confidentialite" className="underline">politique de confidentialité</a> et le traitement de mes données.
                 </p>
               </div>
               {errors.consent && <p className="error -mt-2">{errors.consent.message}</p>}
+              
               {/* Honeypot masqué */}
               <input
                 type="text"
@@ -286,11 +304,11 @@ export default function Contact() {
             <h3 className="font-bold text-lg">Questions fréquentes</h3>
             <details className="mt-2">
               <summary className="cursor-pointer">Délais pour un premier retour ?</summary>
-              <p className="text-slate-300 mt-1">Sous 24h ouvrées, avec un créneau d’appel proposé.</p>
+              <p className="text-slate-300 mt-1">Sous 24h ouvrées, avec un créneau d'appel proposé.</p>
             </details>
             <details className="mt-2">
               <summary className="cursor-pointer">Faites-vous des NDA ?</summary>
-              <p className="text-slate-300 mt-1">Oui, NDA standard possible avant partage d’informations sensibles.</p>
+              <p className="text-slate-300 mt-1">Oui, NDA standard possible avant partage d'informations sensibles.</p>
             </details>
             <details className="mt-2">
               <summary className="cursor-pointer">Accompagnez-vous après la mise en prod ?</summary>
