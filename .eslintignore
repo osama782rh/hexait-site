@@ -1,0 +1,20 @@
+# Dossiers générés
+node_modules/
+dist/
+build/
+.next/
+.out/
+.coverage/
+
+# Fichiers de configuration
+*.config.js
+*.config.ts
+vite-env.d.ts
+
+# Logs et fichiers système
+*.log
+.DS_Store
+Thumbs.db
+
+# Cache
+.eslintcache

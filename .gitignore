@@ -100,14 +100,40 @@ public
 tmp/
 temp/
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
 # TypeScript cache
 *.tsbuildinfo
 
 # Optional stylelint cache
 .stylelintcache
+
+# === AJOUTS RECOMMANDÉS ===
+
+# TurboRepo cache
+.turbo/
+
+# Vite cache
+.vite/
+
+# pnpm
+node_modules/.pnpm-store
+node_modules/.modules.yaml
+node_modules/.cache
+
+# macOS
+*.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# Package managers
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*

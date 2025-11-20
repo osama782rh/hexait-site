@@ -1,26 +1,61 @@
 {
-  "name": "hexait",
-  "private": true,
+  "name": "hexait-site",
+  "type": "module",
   "version": "1.0.0",
-  "description": "Monorepo HEXAIT (React + Node + PostgreSQL)",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "description": "Site web de HEXAIT - Société d'ingénierie informatique",
   "scripts": {
-    "dev": "concurrently -n WEB,API -c blue,magenta \"pnpm --filter web dev\" \"pnpm --filter api dev\""
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint src/ --ext .js,.jsx,.ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "test:build": "npm run type-check && npm run build",
+    "test:all": "npm run lint && npm run type-check && npm run build",
+    "clean": "rm -rf dist .next"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "lucide-react": "^0.542.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.1.1",
+    "react-hook-form": "^7.65.0",
+    "react-router-dom": "^7.9.4",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "@types/node": "^24.9.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.1.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.38.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.4.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.8.3",
+    "vite": "^7.1.2",
+    "vite-plugin-svgr": "^4.5.0"
   },
   "keywords": [
     "react",
-    "node",
-    "postgresql",
-    "devops",
-    "hexait"
+    "typescript",
+    "vite",
+    "tailwindcss",
+    "portfolio",
+    "freelance",
+    "development"
   ],
-  "author": "Osama Rahim",
+  "author": "HEXAIT",
   "license": "MIT",
-  "devDependencies": {
-    "concurrently": "^9.2.1"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hexait-studio/hexait-site"
   },
-  "packageManager": "pnpm@10.15.1"
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
