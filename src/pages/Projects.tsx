@@ -209,9 +209,14 @@ function WelyxProject() {
               <button className="btn-ghost opacity-50 cursor-not-allowed" disabled>
                 <Globe size={16} /> Accès public indisponible
               </button>
-              <Link to="/contact" className="btn-cta">
-                Voir une démo <ArrowRight size={16} />
-              </Link>
+              <a
+                href="https://welyx.fr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-cta"
+              >
+                Visiter <ArrowRight size={16} />
+              </a>
             </div>
           </div>
 
@@ -317,9 +322,14 @@ function OviewProject() {
                 <button className="btn-ghost opacity-50 cursor-not-allowed" disabled>
                   <Globe size={16} /> Accès public indisponible
                 </button>
-                <Link to="/contact" className="btn-cta">
-                  Voir une démo <ArrowRight size={16} />
-                </Link>
+                <a
+                  href="https://oview.fr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-cta"
+                >
+                  Visiter <ArrowRight size={16} />
+                </a>
               </div>
             </div>
 
@@ -426,9 +436,14 @@ function StratGenProject() {
               <button className="btn-ghost opacity-50 cursor-not-allowed" disabled>
                 <Globe size={16} /> Accès public indisponible
               </button>
-              <Link to="/contact" className="btn-cta">
-                Voir une démo <ArrowRight size={16} />
-              </Link>
+              <a
+                href="https://stratgen.fr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-cta"
+              >
+                Visiter <ArrowRight size={16} />
+              </a>
             </div>
           </div>
 
