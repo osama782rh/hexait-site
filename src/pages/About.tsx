@@ -28,15 +28,15 @@ export default function About() {
           </span>
           
           <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
-            Expertise technique,
+            Rigueur d'ingénieur,
             <span className="block text-gradient bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              vision artisanale
+              exigence de résultat
             </span>
           </h1>
-          
+
           <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            HEXAIT allie excellence technique et approche sur-mesure pour transformer 
-            vos idées en produits digitaux performants et sécurisés.
+            HEXAIT est un studio d'ingénierie logicielle qui conçoit des plateformes
+            web et SaaS avec la même exigence qu'un produit interne.
           </p>
         </div>
       </section>
@@ -50,16 +50,16 @@ export default function About() {
             </h2>
             <div className="space-y-4 text-slate-300">
               <p>
-                Fondée en 2025 par un ingénieur passionné par les technologies cloud et le développement de solutions, 
-                HEXAIT est née d'une conviction simple : l'excellence technique doit servir des solutions concrètes et accessibles.
+                Fondée en 2025 par un ingénieur spécialisé dans les technologies cloud et le développement de solutions, 
+                HEXAIT est née d'un constat : trop de projets techniques échouent par manque de rigueur d'exécution, pas par manque d'idées.
               </p>
               <p>
                 Notre nom "HEXAIT" symbolise l'hexagone français et l'IT (Technologies de l'Information), 
                 représentant notre ancrage local et notre expertise globale dans le numérique.
               </p>
               <p>
-                Nous croyons en une approche <strong>artisanale du développement</strong> : chaque projet est unique, 
-                mérite une attention particulière et des solutions sur-mesure.
+                Notre approche : comprendre votre métier avant d'écrire la première ligne de code,
+                puis livrer un produit testé, documenté et prêt à évoluer.
               </p>
             </div>
             
@@ -69,8 +69,8 @@ export default function About() {
                 Notre mission
               </h3>
               <p className="text-slate-300">
-                Concevoir et livrer des produits digitaux <strong>fiables, performants et sécurisés</strong> qui 
-                accélèrent la croissance de nos clients, avec une exigence technique d'excellence.
+                Concevoir des logiciels qui tiennent en production, qui se maintiennent facilement
+                et qui s'adaptent à la croissance de votre activité.
               </p>
             </div>
           </div>
@@ -127,10 +127,10 @@ export default function About() {
             <div className="w-16 h-16 bg-cyan-400/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <Shield className="text-cyan-400" size={32} />
             </div>
-            <h3 className="text-xl font-bold mb-3">Transparence radicale</h3>
+            <h3 className="text-xl font-bold mb-3">Transparence totale</h3>
             <p className="text-slate-300">
-              Code propriétaire, roadmap partagée, risques identifiés. 
-              Nous croyons que la confiance se construit sur la transparence.
+              Accès au board projet, code versionné et accessible, alertes en cas de risque.
+              Vous n'avez jamais à demander où en est le projet.
             </p>
           </div>
           
@@ -138,10 +138,10 @@ export default function About() {
             <div className="w-16 h-16 bg-cyan-400/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <Zap className="text-cyan-400" size={32} />
             </div>
-            <h3 className="text-xl font-bold mb-3">Excellence technique</h3>
+            <h3 className="text-xl font-bold mb-3">Qualité non négociable</h3>
             <p className="text-slate-300">
-              Revues de code systématiques, tests automatisés, architectures robustes. 
-              Chaque détail compte.
+              Revues de code systématiques, couverture de tests, architecture documentée.
+              Le code que nous livrons est celui que nous voudrions maintenir nous-mêmes.
             </p>
           </div>
           
@@ -149,10 +149,10 @@ export default function About() {
             <div className="w-16 h-16 bg-cyan-400/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
               <Users className="text-cyan-400" size={32} />
             </div>
-            <h3 className="text-xl font-bold mb-3">Approche artisanale</h3>
+            <h3 className="text-xl font-bold mb-3">Engagement sur le résultat</h3>
             <p className="text-slate-300">
-              Pas de solutions génériques. Chaque projet est unique et mérite 
-              une solution pensée spécifiquement.
+              Pas de catalogue de solutions préfabriquées. Chaque architecture est
+              pensée pour votre contexte, vos contraintes et vos objectifs.
             </p>
           </div>
         </div>
@@ -172,10 +172,10 @@ export default function About() {
                   <Target className="text-cyan-400" size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-2">Focus sur les objectifs métier</h4>
+                  <h4 className="font-bold text-lg mb-2">Comprendre avant de construire</h4>
                   <p className="text-slate-300">
-                    Nous ne livrons pas du code, nous livrons des solutions qui résolvent 
-                    des problèmes business concrets.
+                    Chaque projet commence par un cadrage métier. Nous identifions
+                    les contraintes techniques et les objectifs business avant de coder.
                   </p>
                 </div>
               </div>
@@ -185,10 +185,10 @@ export default function About() {
                   <Clock className="text-cyan-400" size={24} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-2">Communication transparente</h4>
+                  <h4 className="font-bold text-lg mb-2">Visibilité à chaque étape</h4>
                   <p className="text-slate-300">
-                    Démonstrations hebdomadaires, reporting régulier, accès au board projet. 
-                    Vous savez toujours où nous en sommes.
+                    Démos à chaque sprint, board projet partagé et reporting hebdomadaire.
+                    Zéro effet tunnel.
                   </p>
                 </div>
               </div>
@@ -209,31 +209,31 @@ export default function About() {
           </div>
           
           <div className="card p-8">
-            <h3 className="font-bold text-2xl mb-6">Pourquoi nous choisir ?</h3>
+            <h3 className="font-bold text-2xl mb-6">Ce qui nous distingue</h3>
             <ul className="space-y-4">
               <li className="flex items-center gap-3 text-slate-300">
                 <div className="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 </div>
-                <span><strong>Expertise full-stack</strong> : une vision complète de votre projet</span>
+                <span><strong>Vision full-stack</strong> : front, back, infra — un seul interlocuteur</span>
               </li>
               <li className="flex items-center gap-3 text-slate-300">
                 <div className="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 </div>
-                <span><strong>Flexibilité</strong> : adapté aux startups comme aux entreprises établies</span>
+                <span><strong>Adaptabilité</strong> : startup en lancement ou PME en structuration</span>
               </li>
               <li className="flex items-center gap-3 text-slate-300">
                 <div className="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 </div>
-                <span><strong>Transparence</strong> : pas de surprises, que des engagements tenus</span>
+                <span><strong>Transparence</strong> : board partagé, code accessible, alertes proactives</span>
               </li>
               <li className="flex items-center gap-3 text-slate-300">
                 <div className="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center flex-shrink-0">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 </div>
-                <span><strong>Réactivité</strong> : réponse sous 24h, démos hebdomadaires</span>
+                <span><strong>Réactivité</strong> : réponse sous 24h, démos à chaque itération</span>
               </li>
             </ul>
           </div>
@@ -254,7 +254,7 @@ export default function About() {
             <div className="space-y-3 text-sm text-slate-300">
               <div className="flex items-start gap-3">
                 <MapPin size={16} className="text-cyan-400 mt-0.5 flex-shrink-0" />
-                <span>20 Rue du Commandant Maurice Lissac<br />91250 Tigery, France</span>
+                <span>6 rue d'Armaillé, 75017 Paris<br /><span className="text-xs text-slate-400">(Adresse de correspondance)</span></span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={16} className="text-cyan-400 flex-shrink-0" />
@@ -264,8 +264,8 @@ export default function About() {
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={16} className="text-cyan-400 flex-shrink-0" />
-                <a href="tel:+33765668282" className="hover:text-cyan-200 transition-colors">
-                  +33 7 65 66 82 82
+                <a href="tel:+33184180205" className="hover:text-cyan-200 transition-colors">
+                  +33 1 84 18 02 05
                 </a>
               </div>
             </div>
@@ -291,15 +291,15 @@ export default function About() {
       <Section className="text-center">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-6">
-            Prêt à <span className="text-gradient">donner vie</span> à votre projet ?
+            Un projet à <span className="text-gradient">structurer</span> ?
           </h2>
           <p className="text-xl text-slate-300 mb-8">
-            Discutons de vos besoins et voyons comment nous pouvons vous aider à atteindre vos objectifs.
+            Décrivez votre besoin — nous revenons avec un cadrage technique et une proposition adaptée.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact" className="btn-cta text-lg px-8 py-4 font-semibold">
-              Discuter de mon projet <ArrowRight size={20} />
+              Cadrer mon projet <ArrowRight size={20} />
             </Link>
             <Link to="/services" className="btn-ghost text-lg px-8 py-4">
               Découvrir nos services
@@ -309,15 +309,15 @@ export default function About() {
           <div className="mt-8 grid grid-cols-3 gap-4 text-sm text-slate-400">
             <div>
               <div className="font-semibold text-cyan-300">24h</div>
-              <div>Réponse garantie</div>
+              <div>Réponse sous 24h ouvrées</div>
             </div>
             <div>
               <div className="font-semibold text-cyan-300">100%</div>
-              <div>Code propriétaire</div>
+              <div>Propriété du code source</div>
             </div>
             <div>
               <div className="font-semibold text-cyan-300">0€</div>
-              <div>Audit initial</div>
+              <div>Cadrage technique initial</div>
             </div>
           </div>
         </div>

@@ -1,53 +1,62 @@
-// apps/web/src/main.tsx
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
-import Services from "./pages/Services";
-import Projects from "./pages/Projects";
-import Contact from "./pages/Contact";
-import About from "./pages/About";
 import NotFound from "./pages/NotFound";
-
-// IMPORTE LES NOUVELLES PAGES LÉGALES
-import Legal from "./pages/Legal";
-import Confidentialite from "./pages/Confidentialite";
-import ConditionsGenerales from "./pages/ConditionsGenerales";
-import Cookies from "./pages/Cookies";
-
-
-// IMPORTE LES NOUVELLES PAGES RESSOURCES
-import Blog from "./pages/Blog";
 import "./index.css";
+
+// Lazy-loaded pages (code-splitting)
+const Services = lazy(() => import("./pages/Services"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Contact = lazy(() => import("./pages/Contact"));
+const About = lazy(() => import("./pages/About"));
+const Blog = lazy(() => import("./pages/Blog"));
+const Legal = lazy(() => import("./pages/Legal"));
+const Confidentialite = lazy(() => import("./pages/Confidentialite"));
+const ConditionsGenerales = lazy(() => import("./pages/ConditionsGenerales"));
+const Cookies = lazy(() => import("./pages/Cookies"));
+
+function LazyPage({ children }: { children: React.ReactNode }) {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-[60vh] flex items-center justify-center">
+          <div className="w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
+      {children}
+    </Suspense>
+  );
+}
 
 const router = createBrowserRouter([
   {
     element: <App />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/a-propos", element: <About /> },
-      { path: "/services", element: <Services /> },
-      { path: "/projets", element: <Projects /> },
-      { path: "/contact", element: <Contact /> },
-      
-      // PAGES LÉGALES
-      { path: "/mentions-legales", element: <Legal /> },
-      { path: "/politique-confidentialite", element: <Confidentialite /> },
-      { path: "/cookies", element: <Cookies /> },
-      { path: "/conditions-generales", element: <ConditionsGenerales /> },
+      { path: "/a-propos", element: <LazyPage><About /></LazyPage> },
+      { path: "/services", element: <LazyPage><Services /></LazyPage> },
+      { path: "/projets", element: <LazyPage><Projects /></LazyPage> },
+      { path: "/contact", element: <LazyPage><Contact /></LazyPage> },
 
-      
-      // PAGES RESSOURCES - CORRIGÉ : utilise les bonnes pages
-      { path: "/blog", element: <Blog /> },
-      
-      // Routes pour les sous-pages (redirections)
-      { path: "/services/developpement", element: <Services /> },
-      { path: "/services/cloud", element: <Services /> },
-      { path: "/services/securite", element: <Services /> },
-      { path: "/services/ia", element: <Services /> },
-      { path: "/services/conseil", element: <Services /> },
-      
+      // Pages légales
+      { path: "/mentions-legales", element: <LazyPage><Legal /></LazyPage> },
+      { path: "/politique-confidentialite", element: <LazyPage><Confidentialite /></LazyPage> },
+      { path: "/cookies", element: <LazyPage><Cookies /></LazyPage> },
+      { path: "/conditions-generales", element: <LazyPage><ConditionsGenerales /></LazyPage> },
+
+      // Pages ressources
+      { path: "/blog", element: <LazyPage><Blog /></LazyPage> },
+
+      // Sous-routes services
+      { path: "/services/developpement", element: <LazyPage><Services /></LazyPage> },
+      { path: "/services/cloud", element: <LazyPage><Services /></LazyPage> },
+      { path: "/services/securite", element: <LazyPage><Services /></LazyPage> },
+      { path: "/services/ia", element: <LazyPage><Services /></LazyPage> },
+      { path: "/services/conseil", element: <LazyPage><Services /></LazyPage> },
+
       { path: "*", element: <NotFound /> },
     ],
   },

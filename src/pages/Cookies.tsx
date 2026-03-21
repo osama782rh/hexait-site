@@ -5,17 +5,21 @@ import { useState } from "react";
 import Section from "../components/Section";
 
 export default function Cookies() {
-  const [analyticsAccepted, setAnalyticsAccepted] = useState<boolean | null>(null);
+  const [analyticsAccepted, setAnalyticsAccepted] = useState<boolean | null>(() => {
+    const stored = localStorage.getItem('cookies-analytics');
+    if (stored === 'accepted') return true;
+    if (stored === 'rejected') return false;
+    return null;
+  });
 
   const handleAcceptAnalytics = () => {
     setAnalyticsAccepted(true);
-    // Ici tu intégreras ton système de gestion des cookies
     localStorage.setItem('cookies-analytics', 'accepted');
+    window.location.reload();
   };
 
   const handleRejectAnalytics = () => {
     setAnalyticsAccepted(false);
-    // Ici tu intégreras ton système de gestion des cookies
     localStorage.setItem('cookies-analytics', 'rejected');
   };
 

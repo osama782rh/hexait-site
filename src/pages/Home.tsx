@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import {
   ArrowRight, Shield, Server, Code, Rocket, Wrench, Lock, Lightbulb, PenTool,
-  Workflow, CheckCircle2, Activity, Calendar, ListChecks, Github, BookOpen, GitBranch, ShieldCheck, KeyRound, FileCode2, Clock,
+  Workflow, CheckCircle2, Activity, Calendar, ListChecks, BookOpen, GitBranch, ShieldCheck, KeyRound, FileCode2, Clock,
   Users, Zap, Globe, Cpu
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Section from "../components/Section";
 import type { JSX } from "react";
 import React from 'react';
+import logo from "../assets/HEXAIT_Logo_Header.png";
 
 /** ==== Hooks d'animations (zéro dépendance) ==== */
 function useRevealOnScroll() {
@@ -81,7 +82,7 @@ export default function Home() {
           loop
           playsInline
           preload="metadata"
-          poster="/hero.jpg"
+          poster="/images/services/services.jpg"
           aria-hidden="true"
           onError={(e) => { 
             const target = e.target as HTMLVideoElement;
@@ -92,8 +93,7 @@ export default function Home() {
             target.parentNode?.insertBefore(fallback, target);
           }}
         >
-          <source src="/hero.mp4" type="video/mp4" />
-          <source src="/hero.webm" type="video/webm" />
+          <source src="/images/hero/hero.mp4" type="video/mp4" />
         </video>
 
         {/* Overlay pour meilleure lisibilité */}
@@ -103,26 +103,23 @@ export default function Home() {
         <section className="hero relative z-10 flex flex-col justify-center min-h-screen px-4 sm:px-6 lg:px-8" aria-labelledby="main-title">
           <div className="container mx-auto max-w-6xl text-center">
             
-            {/* Badge marque */}
+            {/* Logo marque */}
             <div className="reveal mb-6">
-              <span className="hero-badge inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm text-slate-200 border border-white/20">
-                <img src="/logo.svg" alt="HEXAIT Logo" className="h-4 w-auto" width={16} height={16} />
-                HEXAIT • Développement Web & Cloud
-              </span>
+              <img src={logo} alt="HEXAIT" className="h-40 w-auto mx-auto" />
             </div>
 
             {/* Titre principal */}
             <h1 id="main-title" className="hero-title reveal-title text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-white mb-6">
-              Applications web
+              Vos logiciels métier,
               <span className="block text-gradient bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mt-2">
-                performantes et fiables
+                conçus pour durer
               </span>
             </h1>
 
             {/* Sous-titre */}
             <p className="hero-sub text-lg sm:text-xl lg:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed reveal reveal-delay-1 mb-8">
-              Développement sur mesure, architecture cloud et bonnes pratiques. 
-              Nous créons des solutions techniques adaptées à vos besoins.
+              HEXAIT développe les plateformes web, SaaS et outils internes
+              qui structurent votre activité — de l'architecture au déploiement.
             </p>
 
             {/* ACTIONS PRINCIPALES - Zone séparée et claire */}
@@ -131,7 +128,7 @@ export default function Home() {
                 to="/contact" 
                 className="btn-cta group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
               >
-                Discuter de mon projet
+                Cadrer mon projet
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
@@ -147,15 +144,15 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 text-sm text-slate-300">
                 <span className="trust-item flex items-center gap-2 px-4 py-3 bg-white/5 rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
                   <CheckCircle2 size={18} className="text-emerald-400 flex-shrink-0" />
-                  Code propriétaire
+                  Vous êtes propriétaire du code
                 </span>
                 <span className="trust-item flex items-center gap-2 px-4 py-3 bg-white/5 rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
                   <Shield size={18} className="text-emerald-400 flex-shrink-0" />
-                  Sécurité intégrée
+                  Sécurité intégrée dès la conception
                 </span>
                 <span className="trust-item flex items-center gap-2 px-4 py-3 bg-white/5 rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
                   <Zap size={18} className="text-emerald-400 flex-shrink-0" />
-                  Livraison agile
+                  Livraison itérative, pas d'effet tunnel
                 </span>
               </div>
             </div>
@@ -173,9 +170,9 @@ export default function Home() {
       {/* Services clés */}
       <Section className="grid-3">
         {[
-          { icon: <Code />, title: "Développement Web", desc: "React/Next.js, Node.js/Python, APIs REST/GraphQL, bases de données" },
-          { icon: <Server />, title: "Cloud & DevOps", desc: "Azure, Docker, déploiement automatisé, monitoring et optimisation" },
-          { icon: <Shield />, title: "Sécurité Développement", desc: "Bonnes pratiques, tests de sécurité, code sécurisé et maintenable" },
+          { icon: <Code />, title: "Développement Web & SaaS", desc: "Plateformes métier, back-offices et applications SaaS — React, Next.js, Node.js, Python" },
+          { icon: <Server />, title: "Cloud & DevOps", desc: "Infrastructure Azure/AWS, CI/CD, conteneurisation Docker et monitoring en production" },
+          { icon: <Shield />, title: "Sécurité Applicative", desc: "Audits de code, protection OWASP, authentification robuste et chiffrement des données sensibles" },
         ].map((s, i) => (
           <div key={i} className={`card reveal reveal-delay-${i}`}>
             <div className="text-cyan-300" aria-hidden="true">{s.icon}</div>
@@ -201,23 +198,24 @@ export default function Home() {
 /* Section expertise technique */
 function TechExpertise() {
   const expertises = [
-    { icon: <Cpu size={20} />, title: "Architecture Moderne", desc: "Applications scalables, APIs robustes, bases de données optimisées" },
-    { icon: <Globe size={20} />, title: "Performance Web", desc: "Applications rapides, optimisation SEO, expérience utilisateur fluide" },
-    { icon: <Users size={20} />, title: "Collaboration Agile", desc: "Communication transparente, livraison itérative, feedback continu" },
+    { icon: <Cpu size={20} />, title: "Architecture pensée pour évoluer", desc: "APIs RESTful & GraphQL, microservices, bases relationnelles et NoSQL optimisées" },
+    { icon: <Globe size={20} />, title: "Performance mesurable", desc: "Core Web Vitals maîtrisés, SSR/SSG, cache intelligent et CDN — chaque milliseconde compte" },
+    { icon: <Users size={20} />, title: "Suivi de projet structuré", desc: "Sprints courts, démos régulières, board projet partagé — vous gardez la visibilité à chaque étape" },
   ];
 
   const techs = [
-    { name: "React", src: "/stack/react.png" },
-    { name: "Next.js", src: "/stack/nextjs.png" },
-    { name: "TypeScript", src: "/stack/ts.png" },
-    { name: "Node.js", src: "/stack/node.png" },
-    { name: "Python", src: "/stack/python.png" },
-    { name: "Azure", src: "/stack/azure.png" },
-    { name: "Docker", src: "/stack/docker.png" },
-    { name: "PostgreSQL", src: "/stack/postgresql.png" },
-    { name: "MongoDB", src: "/stack/mongodb.png" },
-    { name: "GraphQL", src: "/stack/graphql.png" },
-    { name: "Redis", src: "/stack/redis.png" },
+    { name: "React", src: "/images/stack/react.png" },
+    { name: "Next.js", src: "/images/stack/nextjs.png" },
+    { name: "TypeScript", src: "/images/stack/ts.png" },
+    { name: "Node.js", src: "/images/stack/node.png" },
+    { name: "Python", src: "/images/stack/python.png" },
+    { name: "Azure", src: "/images/stack/azure.png" },
+    { name: "AWS", src: "/images/stack/aws.png" },
+    { name: "Docker", src: "/images/stack/docker.png" },
+    { name: "PostgreSQL", src: "/images/stack/postgresql.png" },
+    { name: "MongoDB", src: "/images/stack/mongodb.png" },
+    { name: "GraphQL", src: "/images/stack/graphql.png" },
+    { name: "Redis", src: "/images/stack/redis.png" },
   ];
 
   return (
@@ -254,8 +252,6 @@ function TechExpertise() {
                   loading="lazy"
                   decoding="async"
                   onError={(e) => {
-                    console.error(`Failed to load: ${tech.src}`);
-                    // Fallback visuel
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
                     const fallback = document.createElement('div');
@@ -277,9 +273,9 @@ function TechExpertise() {
 /* Preuves sans partenaires */
 function TrustBuilder() {
   const proofs = [
-    { icon: <FileCode2 size={18} />, label: "Code propriétaire", desc: "Vous restez propriétaire de tout le code source" },
-    { icon: <ShieldCheck size={18} />, label: "Qualité garantie", desc: "Tests automatisés, revues de code, bonnes pratiques" },
-    { icon: <KeyRound size={18} />, label: "Transparence", desc: "Communication régulière, avancement clair, pas de surprise" },
+    { icon: <FileCode2 size={18} />, label: "Propriété intégrale du code", desc: "Chaque ligne livrée vous appartient — avec la documentation technique associée" },
+    { icon: <ShieldCheck size={18} />, label: "Standards industriels", desc: "Couverture de tests, revues de code systématiques, intégration continue" },
+    { icon: <KeyRound size={18} />, label: "Visibilité permanente", desc: "Accès au board projet, reporting hebdomadaire, zéro zone d'ombre" },
   ];
 
   return (
@@ -292,10 +288,10 @@ function TrustBuilder() {
               <Shield className="text-cyan-300" /> Nos engagements
             </h3>
             <ul className="mt-3 space-y-2 text-sm text-slate-300">
-              <li>• Analyse détaillée de votre projet</li>
-              <li>• Propriété du code & documentation complète</li>
-              <li>• Communication transparente et régulière</li>
-              <li>• Support et maintenance optionnels</li>
+              <li>• Cadrage technique avant tout engagement</li>
+              <li>• Code source livré avec documentation</li>
+              <li>• Démonstrations à chaque itération</li>
+              <li>• Garantie corrective post-livraison incluse</li>
             </ul>
           </div>
 
@@ -336,12 +332,9 @@ function TrustBuilder() {
                 </div>
               ))}
               <div className="pt-2 flex gap-3">
-                <a href="https://github.com" target="_blank" rel="noreferrer" className="btn-ghost inline-flex items-center gap-2">
-                  <Github size={16}/> GitHub
-                </a>
-                <a href="/blog" className="btn-ghost inline-flex items-center gap-2">
+                <Link to="/blog" className="btn-ghost inline-flex items-center gap-2">
                   <BookOpen size={16}/> Blog
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -358,7 +351,7 @@ function StatsPromises() {
   const r3 = useRef<HTMLSpanElement>(null);
   const r4 = useRef<HTMLSpanElement>(null);
 
-  useCountUp(r1, 48);
+  useCountUp(r1, 24);
   useCountUp(r2, 7);
   useCountUp(r3, 14);
   useCountUp(r4, 30);
@@ -452,7 +445,7 @@ function WorkflowSection() {
 
         <div className="mt-8 card p-5 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 reveal">
           <p className="text-slate-200">
-            🔁 Développement itératif • 🔒 Sécurité intégrée • 🚀 Livraison progressive
+            Développement itératif • Sécurité intégrée • Livraison progressive
           </p>
           <div className="flex gap-3">
             <Link to="/services" className="btn-ghost">Voir nos services</Link>
@@ -466,9 +459,9 @@ function WorkflowSection() {
 
 function Projects() {
   const items = [
-    { title: "Plateforme B2B", img: "/projects/p1.jpg", desc: "Refonte React + API GraphQL, CI/CD Azure, perf LCP -42%.", link: "/projets#b2b" },
-    { title: "SaaS Analytics", img: "/projects/p2.jpg", desc: "Dashboard Next.js, auth SSO, ingestion temps réel.", link: "/projets#saas" },
-    { title: "E-commerce Headless", img: "/projects/p3.jpg", desc: "Front Next + back composable, A/B testing, Core Web Vitals.", link: "/projets#ecom" },
+    { title: "Welyx — Plateforme SaaS", img: "/images/projects/welyx/dashboard.png", desc: "Gestion assistée par IA pour indépendants et PME : génération de devis, facturation automatique et pilotage d'activité.", link: "/projets#welyx" },
+    { title: "Oview — SaaS Restauration", img: "/images/projects/oview/tdb_vue.png", desc: "Solution tout-en-un pour restaurants : menu digital, commandes, écran cuisine, paiements et analytics temps réel.", link: "/projets#oview" },
+    { title: "StratGen — Plateforme SEO", img: "/images/projects/stratgen/dashboard.png", desc: "Pilotage SEO collaboratif propulsé par l'IA : audit concurrentiel, calendrier éditorial et dashboards en temps réel.", link: "/projets#stratgen" },
   ];
 
   return (
@@ -476,7 +469,7 @@ function Projects() {
       <div className="container">
         <div className="flex items-center gap-3">
           <Rocket className="text-cyan-300" />
-          <h2 className="text-2xl md:text-3xl font-extrabold">Projets récents</h2>
+          <h2 className="text-2xl md:text-3xl font-extrabold">Nos réalisations</h2>
         </div>
 
         <div className="mt-8 grid md:grid-cols-3 gap-6">
@@ -517,26 +510,26 @@ function AboutIntro() {
     <Section>
       <div className="container grid md:grid-cols-2 gap-6 items-center">
         <div className="reveal">
-          <h2 className="text-2xl md:text-3xl font-extrabold">Qui sommes-nous ?</h2>
+          <h2 className="text-2xl md:text-3xl font-extrabold">L'ingénierie logicielle, sans compromis</h2>
           <p className="mt-3 text-slate-300">
-            HEXAIT est un développeur indépendant spécialisé dans la création d'applications web modernes. 
-            Notre approche : du code de qualité, une communication transparente et des solutions adaptées.
+            HEXAIT est une société d'ingénierie fondée par un développeur senior.
+            Nous concevons des plateformes web et SaaS avec une exigence de qualité industrielle — parce que le code que vous financez doit tenir dans la durée.
           </p>
           <ul className="mt-4 list-dash">
-            <li>Expertise technique React, Node.js, Python et cloud</li>
-            <li>Code propre, documenté et maintenable</li>
-            <li>Approche personnalisée selon vos besoins</li>
+            <li>Maîtrise complète de la chaîne : front-end, back-end, infrastructure</li>
+            <li>Code livré documenté, testé et auditable</li>
+            <li>Un interlocuteur technique unique, du cadrage à la mise en production</li>
           </ul>
           <div className="mt-5 flex gap-3">
-            <Link to="/a-propos" className="btn-ghost">Notre parcours</Link>
-            <Link to="/contact" className="btn-cta">Échanger sur mon projet</Link>
+            <Link to="/a-propos" className="btn-ghost">En savoir plus</Link>
+            <Link to="/contact" className="btn-cta">Cadrer mon projet</Link>
           </div>
         </div>
         <div className="card reveal">
           <div className="flex items-center gap-3">
             <Clock className="text-cyan-300" /><p className="text-slate-200 font-semibold">Disponibilité</p>
           </div>
-          <p className="text-slate-400 mt-1 text-sm">Lun–Ven · 9h–18h CET · réponse sous 24h</p>
+          <p className="text-slate-400 mt-1 text-sm">Lun–Ven · 9h–18h CET · premier retour sous 24h ouvrées</p>
           <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-300">
             <div className="bg-white/5 ring-1 ring-white/10 rounded-xl p-3">
               <p className="font-semibold">Communication</p>
@@ -558,24 +551,24 @@ function CallToAction() {
     <Section className="cta-section">
       <div className="cta-container">
         <h3 className="text-3xl md:text-4xl font-extrabold reveal">
-          Prêt à <span className="text-gradient">donner vie à votre projet</span> ?
+          Passez à <span className="text-gradient">l'étape suivante</span>
         </h3>
         <p className="mt-4 text-xl text-slate-300 reveal reveal-delay-1">
-          Estimation gratuite • Expertise technique • Accompagnement personnalisé
+          Cadrage technique offert • Proposition sous 48h ouvrées • Interlocuteur technique dédié
         </p>
 
         <div className="mt-8 grid md:grid-cols-3 gap-4 reveal reveal-delay-2">
           <div className="text-center">
             <CheckCircle2 className="mx-auto text-emerald-400 mb-2" size={24} />
-            <p className="text-sm text-slate-300">Solutions sur mesure</p>
+            <p className="text-sm text-slate-300">Adapté à votre métier</p>
           </div>
           <div className="text-center">
             <Shield className="mx-auto text-emerald-400 mb-2" size={24} />
-            <p className="text-sm text-slate-300">Code qualité et sécurisé</p>
+            <p className="text-sm text-slate-300">Testé, documenté, auditable</p>
           </div>
           <div className="text-center">
             <Rocket className="mx-auto text-emerald-400 mb-2" size={24} />
-            <p className="text-sm text-slate-300">Livraison dans les temps</p>
+            <p className="text-sm text-slate-300">Délais tenus, pas de rallonge</p>
           </div>
         </div>
 
@@ -584,18 +577,18 @@ function CallToAction() {
             to="/contact" 
             className="btn-cta text-lg px-8 py-4 font-semibold focus:ring-4 focus:ring-emerald-400/30 focus:outline-none transition-all"
           >
-            🚀 Démarrer mon projet
+            Cadrer mon projet
           </Link>
           <Link 
             to="/services" 
             className="btn-ghost text-lg px-8 py-4 focus:ring-4 focus:ring-white/20 focus:outline-none transition-all"
           >
-            📋 Découvrir nos services
+            Découvrir nos services
           </Link>
         </div>
 
         <p className="mt-6 text-sm text-slate-400 reveal reveal-delay-4">
-          Réponse sous 48h • Premier échange gratuit • Sans engagement
+          Sans engagement • Cadrage technique inclus • Réponse sous 24h ouvrées
         </p>
       </div>
     </Section>

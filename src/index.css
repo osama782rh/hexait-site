@@ -399,8 +399,8 @@
 /* ==== Animations de révélation avancées ==== */
 .reveal {
   opacity: 0;
-  transform: translateY(30px) rotateX(5deg);
-  filter: blur(8px) saturate(.7);
+  transform: translateY(30px) rotateX(2deg);
+  filter: blur(4px) saturate(.8);
   transition:
     opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),

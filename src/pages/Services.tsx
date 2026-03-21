@@ -31,14 +31,14 @@ export default function Services() {
           <div className="reveal">
             <span className="hero-badge">Nos expertises</span>
             <h1 className="hero-title mt-3">
-              Développement sur mesure <span className="text-gradient">performant et fiable</span>
+              L'ingénierie logicielle <span className="text-gradient">au service de votre métier</span>
             </h1>
             <p className="hero-sub mt-4">
-              Du concept au déploiement : applications web modernes, architecture cloud 
-              et bonnes pratiques de développement.
+              Audit technique, conception, développement et mise en production —
+              nous couvrons l'intégralité du cycle de vie de vos applications.
             </p>
             <div className="hero-actions">
-              <Link to="/contact" className="btn-cta">Parler de votre projet</Link>
+              <Link to="/contact" className="btn-cta">Cadrer mon projet</Link>
               <Link to="/projets" className="btn-ghost">Voir nos réalisations</Link>
             </div>
           </div>
@@ -67,8 +67,8 @@ export default function Services() {
               <h2 className="text-2xl md:text-3xl font-extrabold">UX / UI Design</h2>
             </div>
             <p className="mt-3 text-slate-300">
-              Interfaces intuitives et efficaces conçues pour l'expérience utilisateur. 
-              Nous privilégions la simplicité et l'accessibilité.
+              Des interfaces pensées pour l'utilisateur final : ergonomie testée,
+              composants accessibles et cohérence visuelle sur tous les écrans.
             </p>
 
             <div className="grid grid-cols-2 gap-4 mt-6">
@@ -180,8 +180,8 @@ export default function Services() {
               <h2 className="text-2xl md:text-3xl font-extrabold">Cloud & DevOps</h2>
             </div>
             <p className="mt-3 text-slate-300">
-              Déploiement automatisé, infrastructure scalable et monitoring. 
-              Nous assurons la fiabilité de vos applications en production.
+              Pipelines CI/CD, infrastructure containerisée et monitoring proactif —
+              vos applications restent disponibles et déployables en continu.
             </p>
 
             <div className="grid grid-cols-2 gap-4 mt-6">
@@ -241,7 +241,7 @@ export default function Services() {
             <h2 className="text-2xl md:text-3xl font-extrabold">Sécurité Développement</h2>
           </div>
           <p className="mt-2 text-slate-300">
-            Bonnes pratiques de sécurité intégrées au processus de développement
+            Sécurité intégrée dès l'architecture, pas ajoutée en fin de projet
           </p>
 
           <div className="mt-6 grid md:grid-cols-3 gap-6">
@@ -300,7 +300,8 @@ export default function Services() {
               <h2 className="text-2xl md:text-3xl font-extrabold">Data & Analytics</h2>
             </div>
             <p className="mt-3 text-slate-300">
-              Applications data-driven avec tableaux de bord et métriques business.
+              Tableaux de bord décisionnels, pipelines de données et APIs analytics
+              pour piloter votre activité avec des indicateurs fiables.
             </p>
             <ul className="list-dash mt-3">
               <li>Bases de données optimisées</li>
@@ -308,7 +309,7 @@ export default function Services() {
               <li>APIs données et reporting</li>
             </ul>
             <div className="mt-4 flex gap-3">
-              <Link to="/contact" className="btn-cta">Discuter data</Link>
+              <Link to="/contact" className="btn-cta">Cadrer un projet data</Link>
               <Link to="/projets" className="btn-ghost">Voir un exemple</Link>
             </div>
           </div>
@@ -377,12 +378,11 @@ export default function Services() {
               Un projet en tête ? <span className="text-gradient">Discutons-en</span>
             </h3>
             <p className="mt-3 text-slate-300">
-              Devis personnalisé gratuit sous 48h • Expertise technique garantie
+              Cadrage technique offert • Proposition sous 48h après échange • Interlocuteur senior dédié
             </p>
             <div className="mt-6 flex gap-4 justify-center flex-wrap">
-              <Link to="/contact" className="btn-cta">Demander un devis</Link>
+              <Link to="/contact" className="btn-cta">Obtenir une proposition</Link>
               <Link to="/projets" className="btn-ghost">Voir nos réalisations</Link>
-              <a href="#top" className="btn-ghost">Retour en haut</a>
             </div>
           </div>
         </div>
@@ -425,7 +425,7 @@ function EngagementModels() {
       <div id="offres" className="container">
         <h2 className="text-2xl md:text-3xl font-extrabold">Nos Offres</h2>
         <p className="mt-2 text-slate-300">
-          Des solutions adaptées à chaque étape de votre projet.
+          Trois formats d'intervention selon la maturité de votre projet.
         </p>
         <div className="mt-6 grid md:grid-cols-3 gap-6">
           {items.map((x) => (

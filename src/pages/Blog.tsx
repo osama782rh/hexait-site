@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from 'react';
 
 export default function Blog() {
@@ -481,12 +482,12 @@ predictions = model.predict(image_batch)</code></pre>
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              Engineering Blog
+              Blog d'ingénierie
             </span>
           </h1>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            Expertise technique complète : du frontend aux systèmes embarqués, 
-            en passant par le cloud et l'IA. Guides pratiques pour développeurs.
+            Analyses techniques, benchmarks et retours d'expérience — du frontend
+            aux systèmes distribués, en passant par le cloud et la sécurité.
           </p>
         </div>
 
@@ -537,7 +538,7 @@ predictions = model.predict(image_batch)</code></pre>
             {selectedTech !== 'Tous' && ` • ${selectedTech}`}
           </div>
           <div className="text-sm text-slate-500 text-center sm:text-right">
-            🎯 Guides pratiques • 💻 Code production • 🚀 Expertises réelles
+            Guides pratiques • Code de production • Expertises réelles
           </div>
         </div>
 
@@ -618,18 +619,18 @@ predictions = model.predict(image_batch)</code></pre>
 
         {/* CTA professionnel */}
         <div className="text-center mt-20 p-12 bg-slate-800/30 rounded-2xl border border-slate-700">
-        <h2 className="text-2xl font-bold mb-4 text-white">Votre projet sur les technologies modernes ?</h2>
-        <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
-            Ces technologies vous inspirent pour votre prochain projet ? 
-            Discutons de votre vision et construisons ensemble la solution technique adaptée.
+            <h2 className="text-2xl font-bold mb-4 text-white">Un projet technique à structurer ?</h2>
+            <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
+            Vous avez identifié la bonne stack — il vous faut l'équipe pour l'implémenter.
+            Décrivez votre besoin, nous revenons avec une proposition technique.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a 
-            href="/Contact"
+            <Link 
+            to="/contact"
             className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg font-medium transition-colors shadow-lg shadow-cyan-500/25 text-center"
             >
-            🚀 Discuter de mon projet
-            </a>
+            Cadrer mon projet
+            </Link>
         </div>
         </div>
         </div>

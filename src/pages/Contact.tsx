@@ -1,6 +1,7 @@
 // apps/web/src/pages/Contact.tsx
 import Section from "../components/Section";
-import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, Phone, MapPin, Clock, ShieldCheck, Upload } from "lucide-react";
@@ -27,27 +28,27 @@ const Schema = z.object({
     .refine((v) => !v || /^https?:\/\/.+/i.test(v), "URL invalide (https://)"),
 
   // Projet - CORRIGÉ : utilisation de z.enum avec la syntaxe correcte
-    projectType: z.enum(["Nouveau produit", "Refonte", "Feature/Module", "Audit/Conseil", "Autre"] as const, "Choisis un type de projet"),
+    projectType: z.enum(["Nouveau produit", "Refonte", "Feature/Module", "Audit/Conseil", "Autre"] as const, "Veuillez sélectionner un type de projet"),
     
     services: z
       .array(
         z.enum(["UX/UI", "Front-end", "Back-end", "Cloud/DevOps", "Sécurité", "Data/Analytics"] as const)
       )
-      .min(1, "Sélectionne au moins un service"),
+      .min(1, "Veuillez sélectionner au moins un service"),
     
     // CORRIGÉ : budget avec syntaxe valide
-    budget: z.enum(["<5k€", "5–15k€", "15–40k€", "40–80k€", "80k€+"] as const, "Sélectionne un budget"),
+    budget: z.enum(["<5k€", "5–15k€", "15–40k€", "40–80k€", "80k€+"] as const, "Veuillez sélectionner un budget"),
     
     // CORRIGÉ : timeline avec syntaxe valide
-    timeline: z.enum(["ASAP (<1 mois)", "1–2 mois", "2–3 mois", "3+ mois"] as const, "Sélectionne un délai"),
+    timeline: z.enum(["ASAP (<1 mois)", "1–2 mois", "2–3 mois", "3+ mois"] as const, "Veuillez sélectionner un délai"),
 
   // Message & pièces jointes
-  message: z.string().min(20, "Explique-nous un peu plus ton besoin (min 20 caractères)"),
+  message: z.string().min(20, "Veuillez décrire votre besoin plus en détail (min. 20 caractères)"),
   files: z.any().optional(), // géré côté serveur
 
   // Légal / anti-spam - CORRIGÉ : z.literal avec validation booléenne
   consent: z.boolean().refine((val) => val === true, {
-    message: "Tu dois accepter la politique de confidentialité"
+    message: "Veuillez accepter la politique de confidentialité"
   }),
   
   // honeypot (doit rester vide)
@@ -58,13 +59,15 @@ type FormData = z.infer<typeof Schema>;
 
 export default function Contact() {
   const [submittedData, setSubmittedData] = useState<FormData | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined;
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
-    watch,
+    control,
+    formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(Schema),
     defaultValues: {
@@ -74,31 +77,69 @@ export default function Contact() {
   });
 
   const onSubmit = async (data: FormData) => {
-    // TODO: envoie vers ton API / serverless function / email service
-    // Ex: await fetch("/api/contact", { method: "POST", body: formData });
-    console.log("Contact form payload:", data);
-    setSubmittedData(data);
-    // reset(); // décommente si tu veux vider après envoi
+    setSubmitError(null);
+    setSubmittedData(null);
+
+    if (!contactEndpoint) {
+      setSubmitError(
+        "Le formulaire n'est pas encore configuré côté serveur. Contactez-nous directement à contact@hexait.fr."
+      );
+      return;
+    }
+
+    const payload = {
+      ...data,
+      files: undefined,
+    };
+
+    try {
+      const response = await fetch(contactEndpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Échec de soumission (${response.status})`);
+      }
+
+      setSubmittedData(data);
+      reset({
+        services: [],
+        consent: false,
+      });
+    } catch {
+      setSubmitError(
+        "Une erreur est survenue lors de l'envoi. Vous pouvez nous joindre directement à contact@hexait.fr."
+      );
+    }
   };
 
-  const selectedServices = watch("services", []);
+  const selectedServices = useWatch({
+    control,
+    name: "services",
+    defaultValue: [],
+  });
 
   return (
     <Section>
       <div className="container grid md:grid-cols-3 gap-8">
         {/* ===== Colonne gauche : Formulaire ===== */}
         <div className="md:col-span-2">
-          <h1 className="text-3xl md:text-4xl font-extrabold">Parlons de votre projet</h1>
+          <h1 className="text-3xl md:text-4xl font-extrabold">Décrivez votre besoin</h1>
           <p className="text-slate-300 mt-2">
-            Remplissez ce formulaire : on revient vers vous sous 24h ouvrées.
+            Nous analysons votre demande et revenons avec un cadrage technique sous 48h ouvrées.
           </p>
 
-          {isSubmitSuccessful ? (
+          {submittedData ? (
             <div className="card mt-6 p-6">
               <div className="flex items-start gap-3">
                 <ShieldCheck className="text-cyan-300 mt-1" />
                 <div>
-                  <h2 className="font-bold text-xl">Merci ! Votre demande a bien été envoyée.</h2>
+                  <h2 className="font-bold text-xl">Merci ! Votre demande a bien été transmise.</h2>
                   <p className="text-slate-300 mt-1">
                     Nous vous répondrons rapidement avec les prochaines étapes.
                   </p>
@@ -113,8 +154,12 @@ export default function Contact() {
                   <button 
                     className="btn-ghost mt-4" 
                     onClick={() => { 
+                      setSubmitError(null);
                       setSubmittedData(null); 
-                      reset(); 
+                      reset({
+                        services: [],
+                        consent: false,
+                      }); 
                     }}
                   >
                     Envoyer une autre demande
@@ -124,6 +169,12 @@ export default function Contact() {
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-6">
+              {submitError && (
+                <div className="rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+                  {submitError}
+                </div>
+              )}
+
               {/* Identité */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
@@ -244,7 +295,7 @@ export default function Contact() {
                   />
                   <Upload className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 pointer-events-none" size={18} />
                 </div>
-                <p className="text-xs text-slate-500 mt-1">Formats acceptés côté serveur (à configurer) : PDF, PNG, JPG, ZIP…</p>
+                <p className="text-xs text-slate-500 mt-1">Formats acceptés : PDF, PNG, JPG, ZIP (10 Mo max par fichier)</p>
               </div>
 
               {/* Consentement + honeypot */}
@@ -255,7 +306,7 @@ export default function Contact() {
                   className="mt-1 accent-cyan-400" 
                 />
                 <p className="text-sm text-slate-300">
-                  J'accepte la <a href="/confidentialite" className="underline">politique de confidentialité</a> et le traitement de mes données.
+                  J'accepte la <Link to="/politique-confidentialite" className="underline">politique de confidentialité</Link> et le traitement de mes données.
                 </p>
               </div>
               {errors.consent && <p className="error -mt-2">{errors.consent.message}</p>}
@@ -293,8 +344,8 @@ export default function Contact() {
             <h3 className="font-bold text-lg">Nos coordonnées</h3>
             <ul className="mt-3 space-y-2 text-slate-300">
               <li className="flex items-center gap-2"><Mail size={16} /> contact@hexait.fr</li>
-              <li className="flex items-center gap-2"><Phone size={16} /> +33 7 65 66 82 82</li>
-              <li className="flex items-center gap-2"><MapPin size={16} /> Tigery, France</li>
+              <li className="flex items-center gap-2"><Phone size={16} /> +33 1 84 18 02 05</li>
+              <li className="flex items-start gap-2"><MapPin size={16} className="mt-0.5 flex-shrink-0" /> 6 rue d'Armaillé, 75017 Paris</li>
               <li className="flex items-center gap-2"><Clock size={16} /> Lun–Ven • 9h–18h (CET)</li>
             </ul>
           </div>
@@ -321,7 +372,7 @@ export default function Contact() {
               Données traitées uniquement pour répondre à votre demande. Vous pouvez exercer vos droits à tout moment.
             </p>
             <p className="text-sm text-slate-400 mt-2">
-              Voir notre <a href="/confidentialite" className="underline">Politique de confidentialité</a>.
+              Voir notre <Link to="/politique-confidentialite" className="underline">Politique de confidentialité</Link>.
             </p>
           </div>
         </aside>

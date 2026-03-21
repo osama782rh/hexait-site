@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import Section from "../components/Section";
 import { 
-  ArrowRight, Smartphone, Globe, Brain, 
+  ArrowRight, Globe, Brain, 
   Zap, ShoppingCart, Bolt, Users, Workflow, BarChart3,
   GitBranch, Cloud, X
 } from "lucide-react";
@@ -94,24 +94,27 @@ export default function Projects() {
         <div className="container text-center">
           <span className="hero-badge reveal">Nos réalisations</span>
           <h1 className="hero-title mt-3 reveal-title">
-            Des produits <span className="text-gradient">conçus pour performer</span>
+            Ce que nous <span className="text-gradient">avons construit</span>
           </h1>
           <p className="hero-sub mx-auto mt-4 reveal reveal-delay-1">
-            Applications web, plateformes SaaS, solutions mobiles et outils d'automatisation 
-            qui transforment les processus métier.
+            Plateformes SaaS, outils métier, e-commerce et solutions d'automatisation —
+            chaque projet reflète notre exigence d'exécution.
           </p>
           <div className="hero-actions mt-6 reveal reveal-delay-2">
-            <Link to="/contact" className="btn-cta">Démarrer votre projet</Link>
+            <Link to="/contact" className="btn-cta">Lancer votre projet</Link>
             <Link to="/services" className="btn-ghost">Voir nos services</Link>
           </div>
         </div>
       </Section>
 
-      {/* Projet WorkPilot.AI */}
-      <WorkPilotProject />
+      {/* Projet Welyx */}
+      <WelyxProject />
 
-      {/* Projet Taskin */}
-      <TaskinProject />
+      {/* Projet Oview */}
+      <OviewProject />
+
+      {/* Projet StratGen */}
+      <StratGenProject />
 
       {/* Projet PosturePro */}
       <PostureProProject />
@@ -130,13 +133,13 @@ export default function Projects() {
         <div className="container text-center">
           <div className="card p-10 md:p-12 reveal hover:transform hover:scale-[1.01] transition-all duration-300">
             <h3 className="text-2xl md:text-3xl font-extrabold">
-              Un projet en tête ? <span className="text-gradient">Discutons-en</span>
+              Un projet à <span className="text-gradient">concrétiser</span> ?
             </h3>
             <p className="mt-3 text-slate-300">
-              Audit gratuit de votre idée • Chiffrage sous 24h • Expertise technique garantie
+              Cadrage technique offert • Proposition sous 48h • Interlocuteur senior dédié
             </p>
             <div className="mt-6 flex gap-4 justify-center flex-wrap">
-              <Link to="/contact" className="btn-cta">Démarrer mon projet</Link>
+              <Link to="/contact" className="btn-cta">Cadrer mon projet</Link>
               <Link to="/services" className="btn-ghost">Découvrir nos services</Link>
             </div>
           </div>
@@ -150,27 +153,27 @@ export default function Projects() {
    Composants des projets
    ========================= */
 
-function WorkPilotProject() {
+function WelyxProject() {
   const images = [
-    "/projects/workpilot/dashboard.jpg",
-    "/projects/workpilot/devis-creation.jpg", 
-    "/projects/workpilot/client-view.jpg",
-    "/projects/workpilot/mobile-app.jpg"
+    "/images/projects/welyx/dashboard.png",
+    "/images/projects/welyx/analytics.png", 
+    "/images/projects/welyx/invoices.png",
+    "/images/projects/welyx/mobile-view.png"
   ];
   const { currentIndex } = useImageCarousel(images);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
-      <Section>
+      <Section id="welyx">
         <div className="container grid md:grid-cols-2 gap-8 items-center">
           <div className="reveal">
             <span className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-400/10 text-cyan-300 rounded-full text-sm font-medium">
               <Brain size={16} /> IA • SaaS • Automatisation
             </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold mt-3">WorkPilot.AI</h2>
+            <h2 className="text-2xl md:text-3xl font-extrabold mt-3">Welyx</h2>
             <p className="text-lg text-cyan-300 font-semibold">
-              L'IA qui pilote votre entreprise pendant que vous travaillez
+              Plateforme de gestion assistée par IA pour indépendants et PME
             </p>
             
             <p className="mt-4 text-slate-300">
@@ -194,7 +197,7 @@ function WorkPilotProject() {
             <div className="mt-6">
               <h4 className="font-bold text-slate-200 mb-3">Stack technique</h4>
               <div className="flex flex-wrap gap-2">
-                {["Next.js", "TypeScript", "PostgreSQL", "OpenAI", "Stripe", "AWS"].map(tech => (
+                {["Next.js", "TypeScript", "PostgreSQL", "OpenAI", "Stripe", "Azure"].map(tech => (
                   <span key={tech} className="px-3 py-1 bg-white/5 rounded-full text-sm text-slate-300">
                     {tech}
                   </span>
@@ -204,7 +207,7 @@ function WorkPilotProject() {
 
             <div className="mt-6 flex gap-3">
               <button className="btn-ghost opacity-50 cursor-not-allowed" disabled>
-                <Globe size={16} /> Site en développement
+                <Globe size={16} /> Accès public indisponible
               </button>
               <Link to="/contact" className="btn-cta">
                 Voir une démo <ArrowRight size={16} />
@@ -220,7 +223,7 @@ function WorkPilotProject() {
               <div className="aspect-video relative bg-gradient-to-br from-cyan-500/10 to-purple-500/10">
                 <img
                   src={images[currentIndex]}
-                  alt="WorkPilot.AI - Interface dashboard"
+                  alt="Welyx - Interface dashboard"
                   className="w-full h-full object-cover"
                   loading="lazy"
                   decoding="async"
@@ -256,126 +259,218 @@ function WorkPilotProject() {
   );
 }
 
-function TaskinProject() {
-  const webImages = [
-    "/projects/taskin/web-home.jpg",
-    "/projects/taskin/web-search.jpg", 
-    "/projects/taskin/web-profile.jpg",
-    "/projects/taskin/web-booking.jpg"
-  ];
-  const mobileImages = [
-    "/projects/taskin/mobile-home.jpg",
-    "/projects/taskin/mobile-search.jpg",
-    "/projects/taskin/mobile-chat.jpg",
-    "/projects/taskin/mobile-booking.jpg"
+function OviewProject() {
+  const images = [
+    "/images/projects/oview/landing_page.png",
+    "/images/projects/oview/chiffre_affaire_vue.png", 
+    "/images/projects/oview/commandes.png",
+    "/images/projects/oview/tdb_vue.png"
   ];
 
-  const { currentIndex: webIndex } = useImageCarousel(webImages);
-  const { currentIndex: mobileIndex } = useImageCarousel(mobileImages, 3500);
-  const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
-  const [isWebModalOpen, setIsWebModalOpen] = useState(false);
+  const { currentIndex } = useImageCarousel(images);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
-      <Section>
-        <div className="container">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+      <Section id="oview">
+        <div className="container grid md:grid-cols-2 gap-8 items-center">
             <div className="reveal">
               <span className="inline-flex items-center gap-2 px-3 py-1 bg-green-400/10 text-green-300 rounded-full text-sm font-medium">
-                <Users size={16} /> Marketplace • Mobile • Web
+                <Users size={16} /> SaaS • Restauration • Commandes
               </span>
-              <h2 className="text-2xl md:text-3xl font-extrabold mt-3">Taskin</h2>
+              <h2 className="text-2xl md:text-3xl font-extrabold mt-3">Oview</h2>
               <p className="text-lg text-green-300 font-semibold">
-                Plateforme de mise en relation clients & professionnels
+                Plateforme SaaS tout-en-un pour la restauration
               </p>
 
               <p className="mt-4 text-slate-300">
-                Application mobile et web connectant les clients avec des professionnels 
-                qualifiés dans tous les domaines de service.
+                Solution complète pour restaurants : menu digital (QR code), prise de commande,
+                écran cuisine (KDS), gestion des commandes, paiements, reçus,
+                réservations, promotions et analytics en temps réel.
               </p>
 
-              <div className="mt-6 space-y-3">
-                <div className="flex items-center gap-3">
-                  <Smartphone className="text-green-300" size={18} />
-                  <div>
-                    <p className="font-semibold">Application Mobile</p>
-                    <p className="text-sm text-slate-400">React Native • TypeScript • Expo</p>
-                  </div>
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="card hover:transform hover:-translate-y-1 transition-all duration-300">
+                  <Globe className="text-green-300 mb-2" size={20} />
+                  <h4 className="font-bold text-sm">Menu Digital</h4>
+                  <p className="text-xs text-slate-400 mt-1">QR code, commandes et paiements</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Globe className="text-green-300" size={18} />
-                  <div>
-                    <p className="font-semibold">Site Web</p>
-                    <p className="text-sm text-slate-400">React • JSX • Responsive Design</p>
-                  </div>
+                <div className="card hover:transform hover:-translate-y-1 transition-all duration-300">
+                  <Zap className="text-green-300 mb-2" size={20} />
+                  <h4 className="font-bold text-sm">KDS & Analytics</h4>
+                  <p className="text-xs text-slate-400 mt-1">Écran cuisine et tableau de bord</p>
+                </div>
+              </div>
+
+              <div className="mt-6">
+                <h4 className="font-bold text-slate-200 mb-3">Stack technique</h4>
+                <div className="flex flex-wrap gap-2">
+                  {["Next.js", "TypeScript", "Stripe", "PostgreSQL", "Vercel"].map(tech => (
+                    <span key={tech} className="px-3 py-1 bg-white/5 rounded-full text-sm text-slate-300">
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
 
               <div className="mt-6 flex gap-3">
                 <button className="btn-ghost opacity-50 cursor-not-allowed" disabled>
-                  <Globe size={16} /> Site privé
+                  <Globe size={16} /> Accès public indisponible
                 </button>
-                <button className="btn-ghost opacity-50 cursor-not-allowed" disabled>
-                  <Smartphone size={16} /> App privée
-                </button>
+                <Link to="/contact" className="btn-cta">
+                  Voir une démo <ArrowRight size={16} />
+                </Link>
               </div>
             </div>
 
-            <div className="reveal">
-              <div className="grid grid-cols-2 gap-4">
-                {/* Mobile - Vertical */}
-                <div 
-                  className="card overflow-hidden p-0 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:border hover:border-white/20"
-                  onClick={() => setIsMobileModalOpen(true)}
-                >
-                  <div className="aspect-[9/16] relative bg-gradient-to-br from-green-500/10 to-blue-500/10">
-                    <img
-                      src={mobileImages[mobileIndex]}
-                      alt="Taskin Mobile App"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
+          <div className="reveal">
+            <div 
+              className="card overflow-hidden p-0 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:border hover:border-white/20"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <div className="aspect-video relative bg-gradient-to-br from-green-500/10 to-blue-500/10">
+                <img
+                  src={images[currentIndex]}
+                  alt="Oview - Plateforme restaurant"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
+                  {images.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        index === currentIndex ? 'bg-green-400' : 'bg-white/30'
+                      }`}
                     />
-                  </div>
-                  <div className="p-3">
-                    <p className="text-xs text-slate-400 text-center">Application Mobile</p>
-                  </div>
+                  ))}
                 </div>
-
-                {/* Web - Horizontal */}
-                <div 
-                  className="card overflow-hidden p-0 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:border hover:border-white/20"
-                  onClick={() => setIsWebModalOpen(true)}
-                >
-                  <div className="aspect-video relative bg-gradient-to-br from-blue-500/10 to-purple-500/10">
-                    <img
-                      src={webImages[webIndex]}
-                      alt="Taskin Web Platform"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-3">
-                    <p className="text-xs text-slate-400 text-center">Plateforme Web</p>
-                  </div>
-                </div>
+              </div>
+              <div className="p-4">
+                <p className="text-sm text-slate-400">
+                  Menu digital, gestion des commandes, KDS et tableau de bord analytics
+                </p>
               </div>
             </div>
           </div>
         </div>
       </Section>
 
-      {/* Modals pour Taskin */}
       <ImageModal
-        images={mobileImages}
-        currentIndex={mobileIndex}
-        isOpen={isMobileModalOpen}
-        onClose={() => setIsMobileModalOpen(false)}
+        images={images}
+        currentIndex={currentIndex}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
       />
+    </>
+  );
+}
+
+function StratGenProject() {
+  const images = [
+    "/images/projects/stratgen/landing.png",
+    "/images/projects/stratgen/dashboard.png",
+    "/images/projects/stratgen/strategy.png",
+    "/images/projects/stratgen/calendar.png"
+  ];
+
+  const { currentIndex } = useImageCarousel(images);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  return (
+    <>
+      <Section id="stratgen">
+        <div className="container grid md:grid-cols-2 gap-8 items-center">
+          <div className="reveal">
+            <span className="inline-flex items-center gap-2 px-3 py-1 bg-purple-400/10 text-purple-300 rounded-full text-sm font-medium">
+              <BarChart3 size={16} /> SaaS • SEO • Intelligence Artificielle
+            </span>
+            <h2 className="text-2xl md:text-3xl font-extrabold mt-3">StratGen</h2>
+            <p className="text-lg text-purple-300 font-semibold">
+              Pilotage SEO assisté par IA, orienté performance
+            </p>
+
+            <p className="mt-4 text-slate-300">
+              Solution SaaS de pilotage SEO conçue pour centraliser et automatiser la stratégie
+              de contenu à grande échelle. Gestion par espaces de travail, calendriers éditoriaux,
+              tableaux de bord en temps réel, collaboration avec permissions granulaires et IA d'analyse
+              stratégique pour maximiser la visibilité organique.
+            </p>
+
+            <div className="mt-6 grid grid-cols-2 gap-4">
+              <div className="card hover:transform hover:-translate-y-1 transition-all duration-300">
+                <Brain className="text-purple-300 mb-2" size={20} />
+                <h4 className="font-bold text-sm">IA Stratégique</h4>
+                <p className="text-xs text-slate-400 mt-1">Audit concurrentiel et analyse des écarts</p>
+              </div>
+              <div className="card hover:transform hover:-translate-y-1 transition-all duration-300">
+                <Workflow className="text-purple-300 mb-2" size={20} />
+                <h4 className="font-bold text-sm">Espaces de travail collaboratifs</h4>
+                <p className="text-xs text-slate-400 mt-1">Calendrier éditorial et permissions</p>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <h4 className="font-bold text-slate-200 mb-3">Stack technique</h4>
+              <div className="flex flex-wrap gap-2">
+                {["Next.js", "TypeScript", "Python", "Claude", "PostgreSQL", "Redis"].map(tech => (
+                  <span key={tech} className="px-3 py-1 bg-white/5 rounded-full text-sm text-slate-300">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-6 flex gap-3">
+              <button className="btn-ghost opacity-50 cursor-not-allowed" disabled>
+                <Globe size={16} /> Accès public indisponible
+              </button>
+              <Link to="/contact" className="btn-cta">
+                Voir une démo <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+
+          <div className="reveal">
+            <div
+              className="card overflow-hidden p-0 cursor-pointer transform transition-all duration-300 hover:scale-[1.02] hover:border hover:border-white/20"
+              onClick={() => setIsModalOpen(true)}
+            >
+              <div className="aspect-video relative bg-gradient-to-br from-purple-500/10 to-indigo-500/10">
+                <img
+                  src={images[currentIndex]}
+                  alt="StratGen - Dashboard SEO"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1">
+                  {images.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        index === currentIndex ? 'bg-purple-400' : 'bg-white/30'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className="p-4">
+                <p className="text-sm text-slate-400">
+                  Dashboard SEO, workspaces collaboratifs, audit IA et calendrier éditorial
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       <ImageModal
-        images={webImages}
-        currentIndex={webIndex}
-        isOpen={isWebModalOpen}
-        onClose={() => setIsWebModalOpen(false)}
+        images={images}
+        currentIndex={currentIndex}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
       />
     </>
   );
@@ -383,17 +478,17 @@ function TaskinProject() {
 
 function PostureProProject() {
   const images = [
-    "/projects/posturepro/home.jpg",
-    "/projects/posturepro/products.jpg",
-    "/projects/posturepro/product-detail.jpg",
-    "/projects/posturepro/checkout.jpg"
+    "/images/projects/posturepro/home.jpg",
+    "/images/projects/posturepro/products.jpg",
+    "/images/projects/posturepro/product-detail.jpg",
+    "/images/projects/posturepro/checkout.jpg"
   ];
   const { currentIndex } = useImageCarousel(images);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
-      <Section>
+      <Section id="posturepro">
         <div className="container grid md:grid-cols-2 gap-8 items-center">
           <div className="reveal">
             <span className="inline-flex items-center gap-2 px-3 py-1 bg-orange-400/10 text-orange-300 rounded-full text-sm font-medium">
@@ -465,10 +560,10 @@ function PostureProProject() {
 
 function SovoltProject() {
   const images = [
-    "/projects/sovolt/home.jpg",
-    "/projects/sovolt/services.jpg",
-    "/projects/sovolt/contact.jpg",
-    "/projects/sovolt/mobile-view.jpg"
+    "/images/projects/sovolt/home.jpg",
+    "/images/projects/sovolt/services.jpg",
+    "/images/projects/sovolt/contact.jpg",
+    "/images/projects/sovolt/mobile-view.jpg"
   ];
   const { currentIndex } = useImageCarousel(images);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -544,10 +639,10 @@ function SovoltProject() {
 
 function SynapseFlowProject() {
   const images = [
-    "/projects/synapseflow/dashboard.jpg",
-    "/projects/synapseflow/workflow.jpg",
-    "/projects/synapseflow/analytics.jpg",
-    "/projects/synapseflow/integrations.jpg"
+    "/images/projects/synapseflow/dashboard.jpg",
+    "/images/projects/synapseflow/workflow.jpg",
+    "/images/projects/synapseflow/analytics.jpg",
+    "/images/projects/synapseflow/integrations.jpg"
   ];
   const { currentIndex } = useImageCarousel(images);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -655,7 +750,7 @@ function OtherProjects() {
           Autres réalisations
         </h2>
         <p className="text-slate-300 text-center mt-2 reveal reveal-delay-1">
-          Projets divers démontrant notre polytechnicité et expertise technique
+          D'autres projets menés dans des domaines variés
         </p>
 
         <div className="mt-8 grid md:grid-cols-3 gap-6">

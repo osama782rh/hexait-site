@@ -10,7 +10,7 @@ export default function Head({ title, description }: {
 
   useEffect(() => {
     document.title = `${title} | HEXAIT`;
-    
+
     // Meta description
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
@@ -29,24 +29,25 @@ export default function Head({ title, description }: {
     }
     canonical.setAttribute('href', window.location.origin + location.pathname);
 
-    // Google Analytics - Vérifie si le script existe déjà
-    const existingGtag = document.querySelector('script[src*="googletagmanager"]');
-    if (!existingGtag) {
-      // Premier script asynchrone
-      const script1 = document.createElement('script');
-      script1.async = true;
-      script1.src = 'https://www.googletagmanager.com/gtag/js?id=G-EQF45NJRHS';
-      document.head.appendChild(script1);
+    // Google Analytics — chargé uniquement si l'utilisateur a accepté les cookies analytics
+    const consent = localStorage.getItem('cookies-analytics');
+    if (consent === 'accepted') {
+      const existingGtag = document.querySelector('script[src*="googletagmanager"]');
+      if (!existingGtag) {
+        const script1 = document.createElement('script');
+        script1.async = true;
+        script1.src = 'https://www.googletagmanager.com/gtag/js?id=G-EQF45NJRHS';
+        document.head.appendChild(script1);
 
-      // Deuxième script pour la configuration
-      const script2 = document.createElement('script');
-      script2.innerHTML = `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-EQF45NJRHS');
-      `;
-      document.head.appendChild(script2);
+        const script2 = document.createElement('script');
+        script2.innerHTML = `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-EQF45NJRHS', { anonymize_ip: true });
+        `;
+        document.head.appendChild(script2);
+      }
     }
   }, [title, description, location]);
 
