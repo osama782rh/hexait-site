@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import Section from "../components/Section";
 import type { JSX } from "react";
 import React from 'react';
-import logo from "../assets/HEXAIT_Logo_Header.png";
+import logo from "../assets/logo.png";
 
 /** ==== Hooks d'animations (zéro dépendance) ==== */
 function useRevealOnScroll() {
@@ -105,7 +105,7 @@ export default function Home() {
             
             {/* Logo marque */}
             <div className="reveal mb-6">
-              <img src={logo} alt="HEXAIT" className="h-40 w-auto mx-auto" />
+              <img src={logo} alt="HEXAIT" className="h-40 w-auto mx-auto pointer-events-none select-none" />
             </div>
 
             {/* Titre principal */}
@@ -126,14 +126,14 @@ export default function Home() {
             <div className="hero-actions reveal reveal-delay-2 flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Link 
                 to="/contact" 
-                className="btn-cta group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-400/30"
+                className="btn-cta group inline-flex items-center justify-center gap-2 px-8 py-4 text-white font-bold rounded-lg transition-all duration-300 hover:scale-105 outline-none"
               >
                 Cadrer mon projet
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
                 to="/services" 
-                className="btn-ghost group inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg backdrop-blur-sm border border-white/20 hover:border-white/30 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-white/20"
+                className="btn-ghost group inline-flex items-center justify-center gap-2 px-8 py-4 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 outline-none"
               >
                 Découvrir nos services
               </Link>
@@ -575,13 +575,13 @@ function CallToAction() {
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center reveal reveal-delay-3">
           <Link 
             to="/contact" 
-            className="btn-cta text-lg px-8 py-4 font-semibold focus:ring-4 focus:ring-emerald-400/30 focus:outline-none transition-all"
+            className="btn-cta text-lg px-8 py-4 font-semibold outline-none transition-all"
           >
             Cadrer mon projet
           </Link>
           <Link 
             to="/services" 
-            className="btn-ghost text-lg px-8 py-4 focus:ring-4 focus:ring-white/20 focus:outline-none transition-all"
+            className="btn-ghost text-lg px-8 py-4 outline-none transition-all"
           >
             Découvrir nos services
           </Link>

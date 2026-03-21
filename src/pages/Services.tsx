@@ -30,8 +30,9 @@ export default function Services() {
         <div id="services-hero" className="container grid md:grid-cols-2 gap-8 items-center">
           <div className="reveal">
             <span className="hero-badge">Nos expertises</span>
-            <h1 className="hero-title mt-3">
-              L'ingénierie logicielle <span className="text-gradient">au service de votre métier</span>
+            <h1 className="hero-title services-hero-title mt-3">
+              <span className="title-line">L'ingénierie logicielle</span>
+              <span className="title-line text-gradient">au service de votre métier</span>
             </h1>
             <p className="hero-sub mt-4">
               Audit technique, conception, développement et mise en production —
@@ -47,7 +48,7 @@ export default function Services() {
           <div className="card overflow-hidden reveal hover:transform hover:scale-[1.02] transition-all duration-300">
             <div className="aspect-video bg-white/5 ring-1 ring-white/10 rounded-xl overflow-hidden">
               <img
-                src={asset("services.jpg")}
+                src={asset("services.png")}
                 alt="Aperçu de nos services"
                 className="w-full h-full object-cover opacity-90"
                 loading="lazy"
@@ -98,7 +99,7 @@ export default function Services() {
             <div className="card overflow-hidden reveal hover:transform hover:scale-[1.02] transition-all duration-300">
               <div className="aspect-video rounded-xl overflow-hidden ring-1 ring-white/10">
                 <img
-                  src={asset("wireframes.jpg")}
+                  src={asset("prototype.jpg")}
                   alt="Wireframes & prototypes"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -316,7 +317,7 @@ export default function Services() {
           <div className="card overflow-hidden reveal hover:transform hover:scale-[1.02] transition-all duration-300">
             <div className="aspect-video rounded-xl overflow-hidden ring-1 ring-white/10">
               <img
-                src={asset("dashboard.jpg")}
+                src={asset("analytics.png")}
                 alt="Dashboards & analytics"
                 className="w-full h-full object-cover"
                 loading="lazy"

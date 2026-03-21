@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin, Phone } from "lucide-react";
-import logo from "../assets/HEXAIT_Logo_Header.png";
+import logo from "../assets/logo.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -15,7 +15,7 @@ export default function Footer() {
             <img
               src={logo}
               alt="HEXAIT - Société d'ingénierie informatique"
-              className="h-40 w-auto -mb-8"
+              className="h-24 w-auto -mb-6 -ml-4 pointer-events-none select-none"
               loading="lazy"
             />
           </div>
@@ -48,7 +48,7 @@ export default function Footer() {
           {/* Col 2 – Expertises (liens vers /services) */}
           <div className="h-full">
             <h4 className="footer-head">Expertises</h4>
-            <ul className="footer-list">
+            <ul className="footer-list space-y-1.5">
               <li><Link to="/services" className="footer-link">Développement Web</Link></li>
               <li><Link to="/services" className="footer-link">Cloud &amp; DevOps</Link></li>
               <li><Link to="/services" className="footer-link">Sécurité Applicative</Link></li>
@@ -59,7 +59,7 @@ export default function Footer() {
           {/* Col 3 – Ressources */}
           <div className="h-full">
             <h4 className="footer-head">Ressources</h4>
-            <ul className="footer-list">
+            <ul className="footer-list space-y-1.5">
               <li><Link to="/blog" className="footer-link">Blog technique</Link></li>
               <li><Link to="/projets" className="footer-link">Nos projets</Link></li>
               <li><Link to="/a-propos" className="footer-link">À propos</Link></li>
@@ -69,7 +69,7 @@ export default function Footer() {
           {/* Col 4 – Légal */}
           <div className="h-full">
             <h4 className="footer-head">Légal</h4>
-            <ul className="footer-list">
+            <ul className="footer-list space-y-1.5">
               <li><Link to="/mentions-legales" className="footer-link">Mentions légales</Link></li>
               <li><Link to="/politique-confidentialite" className="footer-link">Politique de confidentialité</Link></li>
               <li><Link to="/cookies" className="footer-link">Gestion des cookies</Link></li>

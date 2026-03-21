@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tail:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(npx vite:*Choisissez votre plan\nUn abonnement est nécessaire pour créer des devis, factures et clients. 14 jours d'essai gratuit sur le plan Starter.\n\nErreur : Price ID invalide pour le plan sélectionné)"
+    ]
+  }
+}

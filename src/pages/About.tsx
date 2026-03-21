@@ -27,10 +27,10 @@ export default function About() {
             Société d'ingénierie informatique
           </span>
           
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
-            Rigueur d'ingénieur,
-            <span className="block text-gradient bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              exigence de résultat
+          <h1 className="mb-6 text-4xl md:text-6xl font-extrabold leading-none">
+            <span className="flex flex-col items-center gap-2 md:gap-3">
+              <span className="block leading-none">Rigueur d'ingénieur,</span>
+              <span className="block leading-none text-gradient">exigence de résultat</span>
             </span>
           </h1>
 

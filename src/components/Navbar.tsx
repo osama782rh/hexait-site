@@ -2,6 +2,7 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import logo from "../assets/logo.png";
 
 const items = [
   { to: "/", label: "Accueil" },
@@ -60,13 +61,10 @@ export default function Navbar() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
           <img 
-            src="/logo.svg" 
+            src={logo} 
             alt="HEXAIT" 
-            className="h-7 transition-transform duration-300 group-hover:scale-110" 
+            className="h-24 w-auto mt-6 ml-4 transition-transform duration-300 group-hover:scale-110 pointer-events-none select-none" 
           />
-          <span className="text-xl font-bold tracking-wide text-slate-100 group-hover:text-cyan-200 transition-colors duration-300">
-            HEXAIT
-          </span>
         </Link>
 
         {/* Desktop Navigation */}
