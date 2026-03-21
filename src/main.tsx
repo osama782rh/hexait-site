@@ -1,21 +1,68 @@
 import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Link, createBrowserRouter, RouterProvider, useRouteError } from "react-router-dom";
 import App from "./App";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import "./index.css";
 
 // Lazy-loaded pages (code-splitting)
-const Services = lazy(() => import("./pages/Services"));
-const Projects = lazy(() => import("./pages/Projects"));
-const Contact = lazy(() => import("./pages/Contact"));
-const About = lazy(() => import("./pages/About"));
-const Blog = lazy(() => import("./pages/Blog"));
-const Legal = lazy(() => import("./pages/Legal"));
-const Confidentialite = lazy(() => import("./pages/Confidentialite"));
-const ConditionsGenerales = lazy(() => import("./pages/ConditionsGenerales"));
-const Cookies = lazy(() => import("./pages/Cookies"));
+const CHUNK_RELOAD_KEY = "hexait:chunk-reload-once";
+
+function lazyWithRetry<T extends React.ComponentType<unknown>>(
+  factory: () => Promise<{ default: T }>
+) {
+  return lazy(async () => {
+    try {
+      const mod = await factory();
+      sessionStorage.removeItem(CHUNK_RELOAD_KEY);
+      return mod;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      const isChunkError = message.includes("Failed to fetch dynamically imported module");
+
+      if (isChunkError && !sessionStorage.getItem(CHUNK_RELOAD_KEY)) {
+        sessionStorage.setItem(CHUNK_RELOAD_KEY, "1");
+        window.location.reload();
+        return new Promise<never>(() => {});
+      }
+
+      throw error;
+    }
+  });
+}
+
+const Services = lazyWithRetry(() => import("./pages/Services"));
+const Projects = lazyWithRetry(() => import("./pages/Projects"));
+const Contact = lazyWithRetry(() => import("./pages/Contact"));
+const About = lazyWithRetry(() => import("./pages/About"));
+const Blog = lazyWithRetry(() => import("./pages/Blog"));
+const Legal = lazyWithRetry(() => import("./pages/Legal"));
+const Confidentialite = lazyWithRetry(() => import("./pages/Confidentialite"));
+const ConditionsGenerales = lazyWithRetry(() => import("./pages/ConditionsGenerales"));
+const Cookies = lazyWithRetry(() => import("./pages/Cookies"));
+
+function RouteErrorFallback() {
+  const error = useRouteError();
+  const message = error instanceof Error ? error.message : "Une erreur inattendue est survenue.";
+
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center px-6">
+      <div className="card max-w-xl w-full text-center">
+        <h1 className="text-2xl md:text-3xl font-extrabold">Erreur de chargement</h1>
+        <p className="mt-3 text-slate-300">{message}</p>
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <button className="btn-cta" onClick={() => window.location.reload()}>
+            Recharger
+          </button>
+          <Link to="/" className="btn-ghost">
+            Retour a l'accueil
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function LazyPage({ children }: { children: React.ReactNode }) {
   return (
@@ -34,6 +81,7 @@ function LazyPage({ children }: { children: React.ReactNode }) {
 const router = createBrowserRouter([
   {
     element: <App />,
+    errorElement: <RouteErrorFallback />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/a-propos", element: <LazyPage><About /></LazyPage> },
