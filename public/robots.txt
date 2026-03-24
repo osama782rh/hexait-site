@@ -1,25 +1,15 @@
-# robots.txt pour HEXAIT
-# Ce fichier indique aux moteurs de recherche comment crawler le site
+# ════════════════════════════════════════════════
+#  HEXAIT — robots.txt
+#  https://hexait.fr
+# ════════════════════════════════════════════════
 
-# User-agent: * signifie que ces règles s'appliquent à tous les robots
 User-agent: *
-
-# Pages autorisées (par défaut, tout est autorisé)
 Allow: /
-
-# Pages à ne pas indexer
 Disallow: /api/
-Disallow: /*.json$
 Disallow: /private/
 
 # Sitemap
 Sitemap: https://hexait.fr/sitemap.xml
-
-# Crawl-delay pour éviter de surcharger le serveur
-# (optionnel, ajustez selon vos besoins)
-Crawl-delay: 1
-
-# Règles spécifiques pour différents robots
 
 # Google
 User-agent: Googlebot
