@@ -1,133 +1,130 @@
-// src/components/Navbar.tsx
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+'use client';
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import logo from "../assets/logo.png";
+
+const logo = "/images/branding/logo.png";
 
 const items = [
-  { to: "/", label: "Accueil" },
-  { to: "/services", label: "Services" },
-  { to: "/projets", label: "Projets" },
-  { to: "/a-propos", label: "À propos" },
-  { to: "/blog", label: "Blog" },
-  { to: "/contact", label: "Contact" },
+  { href: "/", label: "Accueil" },
+  { href: "/services", label: "Services" },
+  { href: "/projets", label: "Nos réalisations" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [solid, setSolid] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
-  // Reset scroll to top on route change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
 
-  // Close mobile menu on route change - CORRIGÉ
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setOpen(false);
-    }, 0);
-    
-    return () => clearTimeout(timer);
-  }, [location.pathname]);
+    const t = setTimeout(() => setOpen(false), 0);
+    return () => clearTimeout(t);
+  }, [pathname]);
 
-  // Scroll effect
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 24);
+    const onScroll = () => setSolid(window.scrollY > 80);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu when clicking outside - AJOUTÉ POUR MEILLEURE UX
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (open && !target.closest('.mobile-panel') && !target.closest('button[aria-label="Menu"]')) {
+    if (!open) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      if (!t.closest('.mobile-panel') && !t.closest('button[aria-label="Menu"]')) {
         setOpen(false);
       }
     };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [open]);
 
-    if (open) {
-      document.addEventListener('click', handleClickOutside);
-      return () => document.removeEventListener('click', handleClickOutside);
-    }
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
   }, [open]);
 
   return (
     <header className={`navbar ${solid ? "solid" : "transparent"}`}>
       <div className="nav-inner">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <img 
-            src={logo} 
-            alt="HEXAIT" 
-            className="h-24 w-auto mt-6 ml-4 transition-transform duration-300 group-hover:scale-110 pointer-events-none select-none" 
+        {/* Logo — left */}
+        <Link href="/" className="flex-shrink-0 group">
+          <img
+            src={logo}
+            alt="HEXAIT"
+            className="h-20 w-auto transition-opacity duration-300 group-hover:opacity-80 pointer-events-none select-none"
           />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          {items.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className={({ isActive }) => 
-                `nav-link ${isActive ? "nav-link-active" : ""}`
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-          <Link to="/contact" className="btn-cta">
-            Demander un devis
-          </Link>
+        {/* Links — center */}
+        <nav className="hidden md:flex items-center gap-6">
+          {items.map((item) => {
+            const isActive = item.href === "/" ? pathname === "/" : (pathname ?? "").startsWith(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`nav-link ${isActive ? "nav-link-active" : ""}`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-200"
-          onClick={() => setOpen(v => !v)} 
+        {/* CTA — right */}
+        <div className="hidden md:block flex-shrink-0">
+          <Link href="/contact" className="btn-cta text-sm px-6 py-2.5">
+            Discuter d&apos;un projet
+          </Link>
+        </div>
+
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/5 transition-colors duration-200"
+          onClick={() => setOpen(v => !v)}
           aria-label="Menu"
           aria-expanded={open}
         >
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <div className="w-5 flex flex-col gap-[5px]">
+            <span className={`block h-[2px] bg-white rounded-full transition-all duration-300 origin-center ${open ? 'rotate-45 translate-y-[7px]' : ''}`} />
+            <span className={`block h-[2px] bg-white rounded-full transition-all duration-300 ${open ? 'opacity-0 scale-x-0' : ''}`} />
+            <span className={`block h-[2px] bg-white rounded-full transition-all duration-300 origin-center ${open ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+          </div>
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile panel */}
       <div className={`mobile-panel ${open ? "open" : ""} md:hidden`}>
-        <div className="container pb-6 pt-4 space-y-3">
-          {items.map(item => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              onClick={() => {
-                // Ferme le menu après un délai pour une meilleure UX
-                setTimeout(() => setOpen(false), 100);
-              }}
-              className={({ isActive }) =>
-                `block py-3 px-4 rounded-lg transition-all duration-200 ${
-                  isActive
-                    ? "bg-cyan-400/20 text-cyan-300 font-semibold border-l-4 border-cyan-400"
-                    : "text-slate-300 hover:bg-white/10 hover:pl-6"
-                }`
-              }
+        {items.map(item => {
+          const isActive = item.href === "/" ? pathname === "/" : (pathname ?? "").startsWith(item.href);
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setTimeout(() => setOpen(false), 100)}
+              className={`mobile-nav-link text-2xl font-bold py-3 ${
+                isActive
+                  ? "text-[var(--accent-light)]"
+                  : "text-[var(--text-secondary)] hover:text-white"
+              }`}
             >
               {item.label}
-            </NavLink>
-          ))}
-          <Link
-            to="/contact"
-            onClick={() => {
-              setTimeout(() => setOpen(false), 100);
-            }}
-            className="btn-cta w-full justify-center mt-4"
-          >
-            Demander un devis
-          </Link>
-        </div>
+            </Link>
+          );
+        })}
+        <Link
+          href="/contact"
+          onClick={() => setTimeout(() => setOpen(false), 100)}
+          className="mobile-nav-link btn-cta mt-6 text-base px-8 py-3"
+        >
+          Discuter d&apos;un projet
+        </Link>
       </div>
     </header>
   );

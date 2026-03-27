@@ -1,105 +1,90 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
-import logo from "../assets/logo.png";
+
+const logo = "/images/branding/logo.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer" role="contentinfo">
-      {/* Corps principal du footer */}
-      <div className="footer-inner !py-14">
-        {/* Col 1 – Branding & coordonnées */}
-        <div className="max-w-sm">
-          <div className="flex items-center gap-3 mb-0">
+    <footer className="footer border-t" role="contentinfo">
+      <div className="footer-inner">
+        {/* Col 1 — Branding + Contact */}
+        <div className="space-y-3">
+          <Link href="/" className="inline-block">
             <img
               src={logo}
-              alt="HEXAIT - Société d'ingénierie informatique"
-              className="h-24 w-auto -mb-6 -ml-4 pointer-events-none select-none"
+              alt="HEXAIT"
+              className="h-20 w-auto pointer-events-none select-none opacity-90"
               loading="lazy"
             />
-          </div>
-          <p className="text-slate-400 leading-relaxed">
-            Studio d'ingénierie logicielle — développement web, cloud et sécurité applicative.
+          </Link>
+          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
+            Studio d&apos;ingénierie logicielle — applications web, SaaS et automatisations sur mesure.
           </p>
 
-          <ul className="mt-6 space-y-3 text-slate-300">
-            <li className="flex items-start gap-3">
-              <MapPin size={18} className="text-cyan-400 flex-shrink-0 mt-0.5" />
-              <span>6 rue d'Armaillé, 75017 Paris</span>
+          <ul className="space-y-2.5">
+            <li className="flex items-start gap-3 text-sm" style={{ color: 'var(--text-secondary)' }}>
+              <MapPin size={15} className="flex-shrink-0 mt-0.5" style={{ color: 'var(--accent)' }} />
+              <span>Paris, France</span>
             </li>
-            <li className="flex items-center gap-3">
-              <Mail size={18} className="text-cyan-400 flex-shrink-0" />
-              <a href="mailto:contact@hexait.fr" className="hover:text-cyan-200 transition-colors">
+            <li className="flex items-center gap-3 text-sm">
+              <Mail size={15} className="flex-shrink-0" style={{ color: 'var(--accent)' }} />
+              <a href="mailto:contact@hexait.fr" className="link-underline" style={{ color: 'var(--text-secondary)' }}>
                 contact@hexait.fr
               </a>
             </li>
-            <li className="flex items-center gap-3">
-              <Phone size={18} className="text-cyan-400 flex-shrink-0" />
-              <a href="tel:+33184180205" className="hover:text-cyan-200 transition-colors">
+            <li className="flex items-center gap-3 text-sm">
+              <Phone size={15} className="flex-shrink-0" style={{ color: 'var(--accent)' }} />
+              <a href="tel:+33184180205" className="link-underline" style={{ color: 'var(--text-secondary)' }}>
                 +33 1 84 18 02 05
               </a>
             </li>
           </ul>
         </div>
 
-        {/* CONTENEUR DE GRILLE pour Expertises, Ressources et Légal */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-          {/* Col 2 – Expertises (liens vers /services) */}
-          <div className="h-full">
-            <h4 className="footer-head">Expertises</h4>
-            <ul className="footer-list space-y-1.5">
-              <li><Link to="/services" className="footer-link">Développement Web</Link></li>
-              <li><Link to="/services" className="footer-link">Cloud &amp; DevOps</Link></li>
-              <li><Link to="/services" className="footer-link">Sécurité Applicative</Link></li>
-              <li><Link to="/services" className="footer-link">Conseil Technique</Link></li>
-            </ul>
-          </div>
-
-          {/* Col 3 – Ressources */}
-          <div className="h-full">
-            <h4 className="footer-head">Ressources</h4>
-            <ul className="footer-list space-y-1.5">
-              <li><Link to="/blog" className="footer-link">Blog technique</Link></li>
-              <li><Link to="/projets" className="footer-link">Nos projets</Link></li>
-              <li><Link to="/a-propos" className="footer-link">À propos</Link></li>
-            </ul>
-          </div>
-
-          {/* Col 4 – Légal */}
-          <div className="h-full">
-            <h4 className="footer-head">Légal</h4>
-            <ul className="footer-list space-y-1.5">
-              <li><Link to="/mentions-legales" className="footer-link">Mentions légales</Link></li>
-              <li><Link to="/politique-confidentialite" className="footer-link">Politique de confidentialité</Link></li>
-              <li><Link to="/cookies" className="footer-link">Gestion des cookies</Link></li>
-              <li><Link to="/conditions-generales" className="footer-link">Conditions générales</Link></li>
-            </ul>
-          </div>
+        {/* Col 2 — Navigation */}
+        <div>
+          <h4 className="footer-head">Navigation</h4>
+          <ul className="space-y-1">
+            <li><Link href="/" className="footer-link">Accueil</Link></li>
+            <li><Link href="/services" className="footer-link">Services</Link></li>
+            <li><Link href="/projets" className="footer-link">Nos réalisations</Link></li>
+            <li><Link href="/contact" className="footer-link">Contact</Link></li>
+          </ul>
         </div>
-        {/* FIN DU CONTENEUR DE GRILLE */}
 
-        {/* Horaires d'ouverture */}
-        <div className="max-w-sm">
-          <div className="p-4 bg-slate-800/50 rounded-lg">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <h5 className="text-sm text-cyan-300 font-semibold">Horaires d'ouverture</h5>
-            </div>
-            <p className="text-slate-400 text-sm">Lun - Ven : 9h - 18h (CET)</p>
-            <p className="text-slate-400 text-xs mt-1">Premier retour sous 24h ouvrées</p>
-          </div>
+        {/* Col 3 — Expertises */}
+        <div>
+          <h4 className="footer-head">Expertises</h4>
+          <ul className="space-y-1">
+            <li><Link href="/services" className="footer-link">Applications Web</Link></li>
+            <li><Link href="/services" className="footer-link">Produits SaaS</Link></li>
+            <li><Link href="/services" className="footer-link">APIs &amp; Cloud</Link></li>
+            <li><Link href="/services" className="footer-link">Audit technique</Link></li>
+          </ul>
+        </div>
+
+        {/* Col 4 — Légal */}
+        <div>
+          <h4 className="footer-head">Légal</h4>
+          <ul className="space-y-1">
+            <li><Link href="/mentions-legales" className="footer-link">Mentions légales</Link></li>
+            <li><Link href="/politique-confidentialite" className="footer-link">Confidentialité</Link></li>
+            <li><Link href="/cookies" className="footer-link">Cookies</Link></li>
+            <li><Link href="/conditions-generales" className="footer-link">CGV</Link></li>
+          </ul>
         </div>
       </div>
 
-      {/* Bas de page avec mentions légales */}
-      <div className="container py-6 border-t border-white/10">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-slate-400 text-sm text-center md:text-left">
-            <p>© {currentYear} HEXAIT SASU — Capital 5 000 € — RCS Evry 992 031 351</p>
-            <p className="text-xs mt-1">SIRET 992 031 351 00016 — TVA Intracom FR11992031351</p>
-          </div>
-        </div>
+      {/* Bottom bar */}
+      <div className="footer-bottom">
+        <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+          © {currentYear} HEXAIT SASU — Tous droits réservés
+        </p>
+        <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+          Conçu avec passion en France
+        </p>
       </div>
     </footer>
   );
