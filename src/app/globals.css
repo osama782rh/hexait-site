@@ -895,25 +895,20 @@
 /* ═══════════════════════════════════════
    ANIMATIONS — Reveal on scroll
    ═══════════════════════════════════════ */
+/* Content visible by default for SEO (Googlebot sees everything).
+   JS adds .js class to <html>, which enables the hidden → reveal animation. */
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  filter: blur(3px);
   transition:
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform, filter;
-  /* Fallback: show content after 2s even if JS fails */
-  animation: reveal-fallback 0s 2s forwards;
 }
 
-@keyframes reveal-fallback {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
+.js .reveal:not(.show) {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(3px);
 }
 
 .reveal.show {
