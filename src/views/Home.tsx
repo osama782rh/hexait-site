@@ -716,10 +716,7 @@ function FinalCTASection() {
       email: (form.elements.namedItem('email') as HTMLInputElement).value,
       message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
     };
-    const endpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT;
-    if (endpoint) {
-      try { await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } catch { /* noop */ }
-    }
+    try { await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } catch { /* noop */ }
     setSent(true);
     setSending(false);
   }, []);

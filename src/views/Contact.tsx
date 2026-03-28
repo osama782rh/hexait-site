@@ -61,7 +61,6 @@ type FormData = z.infer<typeof Schema>;
 export default function Contact() {
   const [submittedData, setSubmittedData] = useState<FormData | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const contactEndpoint = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT as string | undefined;
 
   const {
     register,
@@ -81,20 +80,13 @@ export default function Contact() {
     setSubmitError(null);
     setSubmittedData(null);
 
-    if (!contactEndpoint) {
-      setSubmitError(
-        "Le formulaire n'est pas encore configuré côté serveur. Contactez-nous directement à contact@hexait.fr."
-      );
-      return;
-    }
-
     const payload = {
       ...data,
       files: undefined,
     };
 
     try {
-      const response = await fetch(contactEndpoint, {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           Accept: "application/json",

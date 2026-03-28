@@ -1,5 +1,5 @@
 // Cloudflare Pages Function – POST /api/contact
-// Reçoit le formulaire de contact et envoie un email via MailChannels
+// Reçoit le formulaire de contact et envoie un email via Resend
 
 interface ContactPayload {
   name: string;
@@ -7,27 +7,25 @@ interface ContactPayload {
   email: string;
   phone?: string;
   website?: string;
-  projectType: string;
-  services: string[];
-  budget: string;
-  timeline: string;
+  projectType?: string;
+  services?: string[];
+  budget?: string;
+  timeline?: string;
   message: string;
-  consent: boolean;
+  consent?: boolean;
   company_website?: string; // honeypot
 }
 
 interface Env {
-  CONTACT_EMAIL?: string;    // email destinataire (défaut: contact@hexait.fr)
-  FROM_EMAIL?: string;       // email expéditeur (défaut: noreply@hexait.fr)
-  DKIM_DOMAIN?: string;      // optionnel, pour signature DKIM
-  DKIM_SELECTOR?: string;
-  DKIM_PRIVATE_KEY?: string;
+  RESEND_API_KEY: string;
+  CONTACT_EMAIL?: string;  // email destinataire (défaut: contact@hexait.fr)
+  FROM_EMAIL?: string;     // email expéditeur (défaut: noreply@hexait.fr)
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const headers = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "https://hexait.fr",
+    "Access-Control-Allow-Origin": "https://www.hexait.fr",
   };
 
   try {
@@ -39,18 +37,29 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     }
 
     // Validation minimale
-    if (!body.name || !body.email || !body.message || !body.consent) {
+    if (!body.name || !body.email || !body.message) {
       return new Response(
         JSON.stringify({ error: "Champs obligatoires manquants." }),
         { status: 400, headers }
       );
     }
 
+    if (!context.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not configured");
+      return new Response(
+        JSON.stringify({ error: "Service email non configuré." }),
+        { status: 500, headers }
+      );
+    }
+
     const toEmail = context.env.CONTACT_EMAIL || "contact@hexait.fr";
     const fromEmail = context.env.FROM_EMAIL || "noreply@hexait.fr";
 
+    // Déterminer si c'est le formulaire complet ou le mini formulaire
+    const isFullForm = !!body.projectType;
+
     // Construire le contenu de l'email
-    const emailBody = [
+    const lines: (string | null)[] = [
       `Nouveau contact depuis hexait.fr`,
       `──────────────────────────`,
       `Nom        : ${body.name}`,
@@ -58,52 +67,48 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       `Email      : ${body.email}`,
       body.phone ? `Téléphone  : ${body.phone}` : null,
       body.website ? `Site web   : ${body.website}` : null,
-      `──────────────────────────`,
-      `Type       : ${body.projectType}`,
-      `Services   : ${body.services.join(", ")}`,
-      `Budget     : ${body.budget}`,
-      `Délai      : ${body.timeline}`,
+    ];
+
+    if (isFullForm) {
+      lines.push(
+        `──────────────────────────`,
+        `Type       : ${body.projectType}`,
+        `Services   : ${body.services?.join(", ") || "Non précisé"}`,
+        `Budget     : ${body.budget || "Non précisé"}`,
+        `Délai      : ${body.timeline || "Non précisé"}`,
+      );
+    }
+
+    lines.push(
       `──────────────────────────`,
       `Message :`,
       body.message,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    );
 
-    // Envoi via MailChannels (gratuit depuis Cloudflare Workers)
-    const mailPayload: Record<string, unknown> = {
-      personalizations: [
-        {
-          to: [{ email: toEmail, name: "HexaIT" }],
-        },
-      ],
-      from: { email: fromEmail, name: `${body.name} via HexaIT` },
-      reply_to: { email: body.email, name: body.name },
-      subject: `[HexaIT] ${body.projectType} – ${body.name}`,
-      content: [
-        {
-          type: "text/plain",
-          value: emailBody,
-        },
-      ],
-    };
+    const emailBody = lines.filter(Boolean).join("\n");
+    const subject = isFullForm
+      ? `[HexaIT] ${body.projectType} – ${body.name}`
+      : `[HexaIT] Contact rapide – ${body.name}`;
 
-    // Ajout DKIM si configuré
-    if (context.env.DKIM_DOMAIN && context.env.DKIM_SELECTOR && context.env.DKIM_PRIVATE_KEY) {
-      (mailPayload.personalizations as Record<string, unknown>[])[0].dkim_domain = context.env.DKIM_DOMAIN;
-      (mailPayload.personalizations as Record<string, unknown>[])[0].dkim_selector = context.env.DKIM_SELECTOR;
-      (mailPayload.personalizations as Record<string, unknown>[])[0].dkim_private_key = context.env.DKIM_PRIVATE_KEY;
-    }
-
-    const mailResponse = await fetch("https://api.mailchannels.net/tx/v1/send", {
+    // Envoi via Resend
+    const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(mailPayload),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${context.env.RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: `${body.name} via HexaIT <${fromEmail}>`,
+        to: [toEmail],
+        reply_to: body.email,
+        subject,
+        text: emailBody,
+      }),
     });
 
-    if (!mailResponse.ok) {
-      const errText = await mailResponse.text();
-      console.error("MailChannels error:", mailResponse.status, errText);
+    if (!resendResponse.ok) {
+      const errText = await resendResponse.text();
+      console.error("Resend error:", resendResponse.status, errText);
       return new Response(
         JSON.stringify({ error: "Erreur lors de l'envoi de l'email." }),
         { status: 502, headers }
@@ -128,7 +133,7 @@ export const onRequestOptions: PagesFunction = async () => {
   return new Response(null, {
     status: 204,
     headers: {
-      "Access-Control-Allow-Origin": "https://hexait.fr",
+      "Access-Control-Allow-Origin": "https://www.hexait.fr",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, Accept",
       "Access-Control-Max-Age": "86400",
