@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Section from '@/components/Section';
+import InlineForm from '@/components/InlineForm';
 import Link from 'next/link';
 import {
   Code, Monitor, Smartphone, Gauge, Accessibility, Layers,
@@ -336,24 +337,8 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* CTA final */}
-      <Section>
-        <div className="text-center">
-          <div className="card p-10 md:p-12">
-            <h2 className="text-2xl md:text-3xl font-extrabold">
-              Un projet de <span className="text-gradient">developpement web</span> en tete ?
-            </h2>
-            <p className="mt-3 text-[var(--text-secondary)] max-w-xl mx-auto">
-              Cadrage technique offert. Nous analysons votre besoin et vous proposons une
-              architecture adaptee sous 48 heures. Interlocuteur senior dedie tout au long du projet.
-            </p>
-            <div className="mt-6 flex gap-4 justify-center flex-wrap">
-              <Link href="/contact" className="btn-cta">Obtenir une proposition</Link>
-              <Link href="/projets" className="btn-ghost">Voir nos realisations</Link>
-            </div>
-          </div>
-        </div>
-      </Section>
+      {/* Formulaire inline */}
+      <InlineForm />
     </>
   );
 }

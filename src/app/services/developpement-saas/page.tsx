@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Section from '@/components/Section';
+import InlineForm from '@/components/InlineForm';
 import Link from 'next/link';
 import {
   Cloud, Users, CreditCard, Lock, Layers, Rocket, TrendingUp,
@@ -355,24 +356,8 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* CTA final */}
-      <Section>
-        <div className="text-center">
-          <div className="card p-10 md:p-12">
-            <h2 className="text-2xl md:text-3xl font-extrabold">
-              Pret a <span className="text-gradient">creer votre SaaS</span> ?
-            </h2>
-            <p className="mt-3 text-[var(--text-secondary)] max-w-xl mx-auto">
-              Cadrage technique offert. Nous analysons votre idee, definissons le perimetre
-              de votre MVP et vous proposons une feuille de route concrete sous 48 heures.
-            </p>
-            <div className="mt-6 flex gap-4 justify-center flex-wrap">
-              <Link href="/contact" className="btn-cta">Lancer mon projet SaaS</Link>
-              <Link href="/projets" className="btn-ghost">Voir nos realisations</Link>
-            </div>
-          </div>
-        </div>
-      </Section>
+      {/* Formulaire inline */}
+      <InlineForm />
     </>
   );
 }

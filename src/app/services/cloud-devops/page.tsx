@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Section from '@/components/Section';
+import InlineForm from '@/components/InlineForm';
 import Link from 'next/link';
 import {
   Cloud, GitBranch, Container, Activity, Shield, Server,
@@ -305,24 +306,8 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* CTA final */}
-      <Section>
-        <div className="text-center">
-          <div className="card p-10 md:p-12">
-            <h2 className="text-2xl md:text-3xl font-extrabold">
-              Optimisez votre <span className="text-gradient">infrastructure cloud</span>
-            </h2>
-            <p className="mt-3 text-[var(--text-secondary)] max-w-xl mx-auto">
-              Audit de votre infrastructure actuelle offert. Nous identifions les axes
-              d&apos;amelioration et vous proposons un plan d&apos;action concret sous 48 heures.
-            </p>
-            <div className="mt-6 flex gap-4 justify-center flex-wrap">
-              <Link href="/contact" className="btn-cta">Auditer mon infrastructure</Link>
-              <Link href="/projets" className="btn-ghost">Voir nos realisations</Link>
-            </div>
-          </div>
-        </div>
-      </Section>
+      {/* Formulaire inline */}
+      <InlineForm />
     </>
   );
 }

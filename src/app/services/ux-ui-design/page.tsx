@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Section from '@/components/Section';
+import InlineForm from '@/components/InlineForm';
 import Link from 'next/link';
 import {
   Palette, PenTool, Layers, Users, Accessibility, Smartphone,
@@ -449,25 +450,8 @@ export default function Page() {
         </div>
       </Section>
 
-      {/* CTA final */}
-      <Section>
-        <div className="text-center">
-          <div className="card p-10 md:p-12">
-            <h2 className="text-2xl md:text-3xl font-extrabold">
-              Concevons ensemble des <span className="text-gradient">interfaces memorables</span>
-            </h2>
-            <p className="mt-3 text-[var(--text-secondary)] max-w-xl mx-auto">
-              Premiere session de cadrage offerte. Nous analysons vos besoins, vos utilisateurs
-              cibles et vos contraintes pour vous proposer une approche design adaptee a votre
-              projet et a votre budget.
-            </p>
-            <div className="mt-6 flex gap-4 justify-center flex-wrap">
-              <Link href="/contact" className="btn-cta">Discuter de mon projet</Link>
-              <Link href="/projets" className="btn-ghost">Voir nos realisations</Link>
-            </div>
-          </div>
-        </div>
-      </Section>
+      {/* Formulaire inline */}
+      <InlineForm />
     </>
   );
 }

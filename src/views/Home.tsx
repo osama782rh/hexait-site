@@ -1,12 +1,12 @@
 'use client';
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ArrowRight, Code, Rocket, Wrench, Shield, Lightbulb,
   CheckCircle2, Clock, Zap, MessageSquare, AlertTriangle,
   FileSpreadsheet, Puzzle, Timer, Send, Search, Cloud
 } from "lucide-react";
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Star } from "lucide-react";
 import React from 'react';
 
 /* ─── Hooks ─── */
@@ -91,7 +91,7 @@ export default function Home() {
       <RealisationsSection />
       <StackSection />
       <StatsSection />
-      <TestimonialsSection />
+      <ResultsSection />
       <FinalCTASection />
     </>
   );
@@ -125,13 +125,13 @@ function HeroSection() {
           </div>
 
           <h1 id="main-title" className="font-display text-hero font-extrabold mb-6">
-            <span className="hero-seq-line-1 block">L&apos;excellence technique</span>
-            <span className="hero-seq-line-2 block text-gradient mt-1">au service de votre business.</span>
+            <span className="hero-seq-line-1 block">On construit les logiciels</span>
+            <span className="hero-seq-line-2 block text-gradient mt-1">qui font tourner votre business.</span>
           </h1>
 
           <p className="hero-seq-sub text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed mb-10" style={{ color: 'var(--text-secondary)' }}>
             Applications SaaS, plateformes métier et outils sur mesure —
-            nous développons les logiciels qui font tourner votre business.
+            du cadrage au déploiement, un interlocuteur technique senior de A à Z.
           </p>
 
           <div className="hero-seq-cta flex flex-col sm:flex-row gap-4 justify-center">
@@ -553,16 +553,16 @@ function StatsSection() {
   const r3 = useRef<HTMLSpanElement>(null);
   const r4 = useRef<HTMLSpanElement>(null);
 
-  useCountUp(r1, 6);
-  useCountUp(r2, 3);
-  useCountUp(r3, 24);
-  useCountUp(r4, 100);
+  useCountUp(r1, 7);
+  useCountUp(r2, 48);
+  useCountUp(r3, 100);
+  useCountUp(r4, 0);
 
   const stats = [
-    { ref: r1, suffix: "", label: "Produits livrés en production" },
-    { ref: r2, suffix: "", label: "Plateformes SaaS en service" },
-    { ref: r3, suffix: "h", label: "Délai max de première réponse" },
-    { ref: r4, suffix: "%", label: "Code source livré au client" },
+    { ref: r1, suffix: "j", label: "Pour un premier prototype fonctionnel" },
+    { ref: r2, suffix: "h", label: "Délai max pour une proposition chiffrée" },
+    { ref: r3, suffix: "%", label: "Du code source vous appartient" },
+    { ref: r4, suffix: "", label: "Projet abandonné en cours de route", prefix: "" },
   ];
 
   return (
@@ -589,54 +589,39 @@ function StatsSection() {
 /* ─────────────────────────────────────
    8. TÉMOIGNAGES — Trustpilot style
    ───────────────────────────────────── */
-function TestimonialsSection() {
-  const testimonials = [
+function ResultsSection() {
+  const results = [
     {
-      name: "Sophie Marchand",
-      role: "Directrice Générale",
-      company: "PME Services — Paris",
-      /* TODO: remplacer par la vraie photo */
-      avatar: null,
-      initials: "SM",
-      rating: 5,
-      text: "Notre ancien prestataire nous avait laissés avec une app inutilisable. HEXAIT a repris le projet, audité le code, et reconstruit ce qui devait l'être. En 2 mois on avait une plateforme stable. La transparence à chaque étape, c'est ce qui fait la différence.",
+      project: "Welyx",
+      type: "SaaS",
+      metrics: [
+        { value: "8 sem.", label: "Du cadrage au MVP en production" },
+        { value: "200+", label: "Utilisateurs actifs dès le lancement" },
+        { value: "100%", label: "Code livré, propriété totale du client" },
+      ],
+      desc: "Plateforme de gestion pour indépendants. Devis, factures, pilotage — automatisés de A à Z.",
     },
     {
-      name: "Thomas Lefèvre",
-      role: "CTO",
-      company: "Startup SaaS — Lyon",
-      avatar: null,
-      initials: "TL",
-      rating: 5,
-      text: "J'avais besoin de renfort sur un projet complexe — pipeline data + IA + interface utilisateur. HEXAIT a su s'intégrer dans notre stack existante sans tout casser. Code propre, bien documenté, livrables dans les temps. Je recommande.",
+      project: "Oview",
+      type: "Application web",
+      metrics: [
+        { value: "6 sem.", label: "Première version déployée" },
+        { value: "Temps réel", label: "Commandes et analytics en live" },
+        { value: "3 APIs", label: "Intégrations tierces connectées" },
+      ],
+      desc: "Solution tout-en-un pour la restauration : menu digital, commandes, paiements et analytics.",
     },
     {
-      name: "Amira Benali",
-      role: "Fondatrice",
-      company: "E-commerce — Île-de-France",
-      avatar: null,
-      initials: "AB",
-      rating: 5,
-      text: "J'avais contacté 4 prestataires. HEXAIT est le seul qui m'a posé les bonnes questions sur mon business avant de parler technique. Le cadrage initial m'a évité de développer des fonctionnalités inutiles. Budget respecté, délais tenus.",
-    },
-    {
-      name: "Mehdi Rousseau",
-      role: "Gérant",
-      company: "Cabinet de conseil — Paris",
-      avatar: null,
-      initials: "MR",
-      rating: 5,
-      text: "On gérait tout sur Excel et ça devenait ingérable. HEXAIT nous a construit un outil métier sur mesure en 8 semaines. Mon équipe a gagné 2h par jour. Et surtout, on est propriétaires du code — pas enfermés chez un éditeur.",
+      project: "StratGen",
+      type: "SaaS IA",
+      metrics: [
+        { value: "-40%", label: "De temps sur le reporting SEO" },
+        { value: "IA", label: "Génération de stratégies automatisée" },
+        { value: "Multi-user", label: "Collaboration en temps réel" },
+      ],
+      desc: "Pilotage SEO collaboratif propulsé par l'IA. Audit, calendrier éditorial et dashboards.",
     },
   ];
-
-  const Stars = ({ count }: { count: number }) => (
-    <div className="flex gap-0.5">
-      {Array.from({ length: count }).map((_, i) => (
-        <Star key={i} size={14} fill="#22D3EE" stroke="#22D3EE" />
-      ))}
-    </div>
-  );
 
   return (
     <section className="home-section">
@@ -644,52 +629,30 @@ function TestimonialsSection() {
         <div className="section-divider mb-20" />
 
         <div className="text-center mb-14">
-          <span className="section-label reveal">// 07 — TÉMOIGNAGES</span>
+          <span className="section-label reveal">// 07 — RÉSULTATS</span>
           <h2 className="font-display text-display-lg font-extrabold reveal">
-            Ce que disent <span className="text-gradient">nos clients</span>
+            Des résultats, <span className="text-gradient">pas des promesses</span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto reveal reveal-delay-1" style={{ color: 'var(--text-secondary)' }}>
-            Retours vérifiés de nos clients sur leurs projets.
+            Chaque projet est en production et utilisé par de vrais utilisateurs.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-5">
-          {testimonials.map((t, i) => (
-            <div key={i} className={`card reveal reveal-delay-${i % 2}`}>
-              <div className="flex items-start gap-4">
-                {/* Avatar */}
-                <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold"
-                  style={{
-                    background: 'var(--accent-muted)',
-                    border: '1px solid var(--accent-border)',
-                    color: 'var(--accent-light)',
-                  }}
-                >
-                  {t.avatar ? (
-                    <img src={t.avatar} alt={t.name} className="w-full h-full rounded-full object-cover" />
-                  ) : (
-                    t.initials
-                  )}
-                </div>
-
-                <div className="flex-1 min-w-0">
-                  {/* Header */}
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <div>
-                      <p className="text-sm font-semibold text-white">{t.name}</p>
-                      <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
-                        {t.role} — {t.company}
-                      </p>
-                    </div>
-                    <Stars count={t.rating} />
+        <div className="grid md:grid-cols-3 gap-5">
+          {results.map((r, i) => (
+            <div key={i} className={`card reveal reveal-delay-${i}`}>
+              <div className="flex items-center gap-3 mb-4">
+                <h3 className="font-display font-bold text-lg text-white">{r.project}</h3>
+                <span className="tag">{r.type}</span>
+              </div>
+              <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--text-secondary)' }}>{r.desc}</p>
+              <div className="space-y-3 pt-4" style={{ borderTop: '1px solid var(--border)' }}>
+                {r.metrics.map((m, j) => (
+                  <div key={j} className="flex items-center gap-3">
+                    <span className="font-bold text-sm shrink-0 w-20" style={{ color: 'var(--accent-light)' }}>{m.value}</span>
+                    <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{m.label}</span>
                   </div>
-
-                  {/* Quote */}
-                  <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                    &ldquo;{t.text}&rdquo;
-                  </p>
-                </div>
+                ))}
               </div>
             </div>
           ))}
@@ -704,7 +667,7 @@ function TestimonialsSection() {
    9. CTA FINAL — Formulaire inline
    ───────────────────────────────────── */
 function FinalCTASection() {
-  const [sent, setSent] = useState(false);
+  const router = useRouter();
   const [sending, setSending] = useState(false);
 
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
@@ -717,9 +680,8 @@ function FinalCTASection() {
       message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
     };
     try { await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } catch { /* noop */ }
-    setSent(true);
-    setSending(false);
-  }, []);
+    router.push('/thank-you');
+  }, [router]);
 
   return (
     <section className="cta-section">
@@ -761,17 +723,6 @@ function FinalCTASection() {
 
           {/* Right — inline form */}
           <div className="card p-8 reveal reveal-delay-1">
-            {sent ? (
-              <div className="text-center py-8">
-                <div className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center mb-4" style={{ background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.2)' }}>
-                  <CheckCircle2 size={28} className="text-emerald-400" />
-                </div>
-                <h3 className="font-display text-xl font-bold text-white">Message envoyé</h3>
-                <p className="mt-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                  On revient vers vous sous 24h.
-                </p>
-              </div>
-            ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
                 <h3 className="font-display text-lg font-bold text-white">Contact rapide</h3>
                 <div>
@@ -797,7 +748,6 @@ function FinalCTASection() {
                   Pas de spam. Vos données restent confidentielles.
                 </p>
               </form>
-            )}
           </div>
         </div>
       </div>
