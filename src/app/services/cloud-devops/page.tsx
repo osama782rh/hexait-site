@@ -10,12 +10,12 @@ import {
 export const metadata: Metadata = {
   title: 'Cloud & DevOps -- Infrastructure scalable et CI/CD | HEXAIT',
   description:
-    'Services cloud et DevOps a Paris : CI/CD, Docker, Kubernetes, infrastructure as code, monitoring et optimisation des couts. Azure, AWS, GCP. HEXAIT.',
+    'Services cloud et DevOps : CI/CD, Docker, Kubernetes, infrastructure as code, monitoring et optimisation des couts. Azure, AWS, GCP. HEXAIT.',
   alternates: { canonical: '/services/cloud-devops' },
   openGraph: {
     title: 'Cloud & DevOps -- Infrastructure scalable et CI/CD | HEXAIT',
     description:
-      'Infrastructure cloud scalable, pipelines CI/CD, containerisation et monitoring proactif. HEXAIT, votre partenaire DevOps a Paris.',
+      'Infrastructure cloud scalable, pipelines CI/CD, containerisation et monitoring proactif. HEXAIT, votre partenaire DevOps.',
   },
 };
 

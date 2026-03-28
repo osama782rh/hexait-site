@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: 'UX/UI Design -- Interfaces intuitives et design systeme | HEXAIT',
   description:
-    'UX UI design a Paris : recherche utilisateur, wireframes, prototypes Figma, design system et accessibilite WCAG. Interfaces intuitives pour vos applications web. HEXAIT.',
+    'UX UI design : recherche utilisateur, wireframes, prototypes Figma, design system et accessibilite WCAG. Interfaces intuitives pour vos applications web. HEXAIT.',
   alternates: { canonical: '/services/ux-ui-design' },
   openGraph: {
     title: 'UX/UI Design -- Interfaces intuitives et design systeme | HEXAIT',
@@ -33,7 +33,7 @@ export default function Page() {
             Le design d&apos;interface application ne se limite pas a l&apos;esthetique. Chez HEXAIT,
             nous concevons des experiences utilisateur fondees sur la recherche, les tests et
             l&apos;iteration. Nos interfaces sont pensees pour etre comprises immediatement,
-            accessibles a tous et coherentes sur chaque ecran. UX UI design a Paris, au service
+            accessibles a tous et coherentes sur chaque ecran. UX UI design au service
             de vos applications web et metier.
           </p>
           <div className="mt-6 flex gap-4 justify-center flex-wrap">

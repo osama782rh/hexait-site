@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: 'Audit Technique & Securite -- Analyse de votre code et infrastructure | HEXAIT',
   description:
-    'Audit technique de site web et audit de code source a Paris. Analyse de la qualite du code, securite, performance, architecture et dependances. Rapport detaille et plan d&apos;action. HEXAIT.',
+    'Audit technique de site web et audit de code source. Analyse de la qualite du code, securite, performance, architecture et dependances. Rapport detaille et plan d&apos;action. HEXAIT.',
   alternates: { canonical: '/services/audit-technique' },
   openGraph: {
     title: 'Audit Technique & Securite -- Analyse de votre code et infrastructure | HEXAIT',

@@ -10,12 +10,12 @@ import {
 export const metadata: Metadata = {
   title: 'Developpement Web sur mesure -- Applications & Sites web | HEXAIT',
   description:
-    'Developpement web sur mesure a Paris : creation d&apos;applications web, sites vitrine, SPAs, PWAs et dashboards. React, Next.js, TypeScript, Node.js. Devis gratuit.',
+    'Developpement web sur mesure : creation d&apos;applications web, sites vitrine, SPAs, PWAs et dashboards. React, Next.js, TypeScript, Node.js. Devis gratuit.',
   alternates: { canonical: '/services/developpement-web' },
   openGraph: {
     title: 'Developpement Web sur mesure -- Applications & Sites web | HEXAIT',
     description:
-      'Developpement web sur mesure a Paris : creation d&apos;applications web performantes avec React, Next.js, TypeScript et Node.js.',
+      'Developpement web sur mesure : creation d&apos;applications web performantes avec React, Next.js, TypeScript et Node.js.',
   },
 };
 
@@ -27,7 +27,7 @@ export default function Page() {
         <div className="text-center max-w-3xl mx-auto">
           <span className="hero-badge">Developpement Web</span>
           <h1 className="text-4xl md:text-5xl font-extrabold mt-4">
-            <span className="text-gradient">Developpement web sur mesure</span> a Paris
+            <span className="text-gradient">Developpement web sur mesure</span>
           </h1>
           <p className="mt-4 text-lg text-[var(--text-secondary)]">
             Chez HEXAIT, nous concevons des applications web performantes, accessibles et

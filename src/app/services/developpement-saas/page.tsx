@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: "Developpement SaaS sur mesure -- De l'idee au produit | HEXAIT",
   description:
-    "Developpement SaaS sur mesure : architecture multi-tenant, facturation integree, authentification, scalabilite. De l'idee au MVP puis a la croissance. HEXAIT Paris.",
+    "Developpement SaaS sur mesure : architecture multi-tenant, facturation integree, authentification, scalabilite. De l'idee au MVP puis a la croissance. HEXAIT.",
   alternates: { canonical: '/services/developpement-saas' },
   openGraph: {
     title: "Developpement SaaS sur mesure -- De l'idee au produit | HEXAIT",
