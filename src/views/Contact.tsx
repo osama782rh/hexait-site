@@ -2,6 +2,7 @@
 // apps/web/src/pages/Contact.tsx
 import Section from "@/components/Section";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -59,6 +60,7 @@ const Schema = z.object({
 type FormData = z.infer<typeof Schema>;
 
 export default function Contact() {
+  const router = useRouter();
   const [submittedData, setSubmittedData] = useState<FormData | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -99,11 +101,7 @@ export default function Contact() {
         throw new Error(`Échec de soumission (${response.status})`);
       }
 
-      setSubmittedData(data);
-      reset({
-        services: [],
-        consent: false,
-      });
+      router.push('/thank-you');
     } catch {
       setSubmitError(
         "Une erreur est survenue lors de l'envoi. Vous pouvez nous joindre directement à contact@hexait.fr."
