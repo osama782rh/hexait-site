@@ -44,7 +44,19 @@
       "Bash(grep -oE '\\(Inter|Syne|DM.Sans\\)' out/_next/static/css/*.css)",
       "Bash(npx kill-port:*)",
       "Bash(taskkill //F //IM node.exe)",
-      "Bash(rm -rf .next)"
+      "Bash(rm -rf .next)",
+      "Bash(curl -sL --max-time 15 -A \"Mozilla/5.0\" https://welyx.fr)",
+      "Bash(curl -s -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" --max-time 30 \"https://oview.fr\")",
+      "Bash(curl -s -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" --max-time 30 \"https://stratgen.fr\")",
+      "Bash(curl -s -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" --max-time 30 \"https://stratgen.fr\")",
+      "Bash(curl -sL --max-time 15 -A Mozilla/5.0 https://welyx.fr)",
+      "Bash(curl -s -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" --max-time 30 \"https://oview.fr\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" --max-time 30 \"https://oview.fr\" -o \"$TEMP/oview_raw.html\")",
+      "Read(//c/Dev/ProjetsSO/HEXAIT/HexaIT Site/$TEMP/**)",
+      "Bash(python3:*)",
+      "Bash(echo $TEMP)",
+      "Bash(curl:*)"
     ]
   }
 }

@@ -60,6 +60,26 @@ export default function Services() {
         </div>
       </Section>
 
+      {/* Liens rapides vers les services détaillés */}
+      <Section>
+        <div className="container">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 reveal">
+            {[
+              { href: '/services/developpement-web', label: 'Développement Web', icon: <Code size={20} aria-hidden="true" /> },
+              { href: '/services/developpement-saas', label: 'SaaS sur mesure', icon: <Rocket size={20} aria-hidden="true" /> },
+              { href: '/services/cloud-devops', label: 'Cloud & DevOps', icon: <Cloud size={20} aria-hidden="true" /> },
+              { href: '/services/audit-technique', label: 'Audit Technique', icon: <Shield size={20} aria-hidden="true" /> },
+              { href: '/services/ux-ui-design', label: 'UX/UI Design', icon: <Palette size={20} aria-hidden="true" /> },
+            ].map(s => (
+              <Link key={s.href} href={s.href} className="card flex flex-col items-center gap-2 text-center hover:border-[var(--accent)]/50 transition-all p-4">
+                <span className="text-[var(--accent-light)]">{s.icon}</span>
+                <span className="text-sm font-medium">{s.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </Section>
+
       {/* UX Design */}
       <Section>
         <div id="ux" className="container grid md:grid-cols-2 gap-8 items-start">

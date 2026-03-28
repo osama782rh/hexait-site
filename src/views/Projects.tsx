@@ -172,7 +172,9 @@ function WelyxProject() {
             <span className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-400/10 text-[var(--accent-light)] rounded-full text-sm font-medium">
               <Brain size={16} /> IA • SaaS • Automatisation
             </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold mt-3">Welyx</h2>
+            <Link href="/projets/welyx" className="hover:text-[var(--accent-light)] transition-colors">
+              <h2 className="text-2xl md:text-3xl font-extrabold mt-3">Welyx</h2>
+            </Link>
             <p className="text-lg text-[var(--accent-light)] font-semibold">
               Plateforme de gestion assistée par IA pour indépendants et PME
             </p>
@@ -284,7 +286,9 @@ function OviewProject() {
               <span className="inline-flex items-center gap-2 px-3 py-1 bg-green-400/10 text-green-300 rounded-full text-sm font-medium">
                 <Users size={16} /> SaaS • Restauration • Commandes
               </span>
-              <h2 className="text-2xl md:text-3xl font-extrabold mt-3">Oview</h2>
+              <Link href="/projets/oview" className="hover:text-[var(--accent-light)] transition-colors">
+                <h2 className="text-2xl md:text-3xl font-extrabold mt-3">Oview</h2>
+              </Link>
               <p className="text-lg text-green-300 font-semibold">
                 Plateforme SaaS tout-en-un pour la restauration
               </p>
@@ -397,7 +401,9 @@ function StratGenProject() {
             <span className="inline-flex items-center gap-2 px-3 py-1 bg-purple-400/10 text-purple-300 rounded-full text-sm font-medium">
               <BarChart3 size={16} /> SaaS • SEO • Intelligence Artificielle
             </span>
-            <h2 className="text-2xl md:text-3xl font-extrabold mt-3">StratGen</h2>
+            <Link href="/projets/stratgen" className="hover:text-[var(--accent-light)] transition-colors">
+              <h2 className="text-2xl md:text-3xl font-extrabold mt-3">StratGen</h2>
+            </Link>
             <p className="text-lg text-purple-300 font-semibold">
               Pilotage SEO assisté par IA, orienté performance
             </p>

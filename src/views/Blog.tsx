@@ -492,6 +492,40 @@ predictions = model.predict(image_batch)</code></pre>
           </p>
         </div>
 
+        {/* Articles SEO approfondis */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold mb-6 text-white">Guides approfondis</h2>
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+            {[
+              { href: '/blog/combien-coute-developpement-web-sur-mesure', title: 'Combien coûte un développement web sur mesure en 2026 ?', excerpt: 'Budgets réalistes par type de projet, facteurs de coût et comparatif avec les solutions no-code.', readTime: '15 min' },
+              { href: '/blog/saas-sur-mesure-vs-no-code', title: 'SaaS sur mesure vs No-Code : quel choix pour votre startup ?', excerpt: 'Comparatif honnête : quand le no-code suffit, quand le sur-mesure devient indispensable.', readTime: '12 min' },
+              { href: '/blog/comment-choisir-agence-web-paris', title: 'Comment choisir son agence web à Paris en 2026', excerpt: 'Critères d\u2019évaluation, red flags, questions à poser et comparatif freelance vs agence vs ESN.', readTime: '14 min' },
+              { href: '/blog/pourquoi-choisir-nextjs', title: 'Pourquoi choisir Next.js pour votre application web ?', excerpt: 'SSR, SSG, Server Components : les avantages concrets de Next.js pour le SEO et la performance.', readTime: '12 min' },
+              { href: '/blog/etapes-projet-developpement-logiciel', title: 'Les 7 étapes clés d\u2019un projet de développement logiciel', excerpt: 'Du cadrage au déploiement : livrables, durées et conseils pratiques pour chaque phase.', readTime: '13 min' },
+              { href: '/blog/automatiser-gestion-entreprise-ia', title: 'Comment l\u2019IA peut automatiser la gestion de votre entreprise', excerpt: 'Cas concrets : facturation, analyse de données, chatbots, prédiction. ROI et mise en place.', readTime: '14 min' },
+            ].map(article => (
+              <Link
+                key={article.href}
+                href={article.href}
+                className="group bg-[var(--bg-tertiary)]/30 backdrop-blur-sm rounded-xl border border-[var(--border)] hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 p-6 block"
+              >
+                <span className="inline-block px-3 py-1 bg-cyan-500/20 text-[var(--accent-light)] rounded-full text-sm font-medium mb-3">
+                  Guide complet
+                </span>
+                <h3 className="font-bold text-lg mb-2 group-hover:text-[var(--accent-light)] transition-colors">
+                  {article.title}
+                </h3>
+                <p className="text-[var(--text-secondary)] text-sm mb-4 leading-relaxed">
+                  {article.excerpt}
+                </p>
+                <span className="text-sm text-[var(--text-tertiary)]">⏱️ {article.readTime} de lecture</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <h2 className="text-2xl font-bold mb-6 text-white">Fiches techniques</h2>
+
         {/* Filtres fonctionnels */}
         <div className="flex flex-col lg:flex-row gap-6 mb-12 p-6 bg-[var(--bg-tertiary)]/50 rounded-2xl border border-[var(--border)]">
           <div className="flex-1">

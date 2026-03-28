@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.hexait.fr</loc><lastmod>2026-03-27</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://www.hexait.fr/services</loc><lastmod>2026-03-27</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.hexait.fr/projets</loc><lastmod>2026-03-27</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.hexait.fr/contact</loc><lastmod>2026-03-27</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://www.hexait.fr/a-propos</loc><lastmod>2026-03-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://www.hexait.fr/blog</loc><lastmod>2026-03-27</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://www.hexait.fr/mentions-legales</loc><lastmod>2026-03-27</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://www.hexait.fr/politique-confidentialite</loc><lastmod>2026-03-27</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://www.hexait.fr/conditions-generales</loc><lastmod>2026-03-27</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://www.hexait.fr/cookies</loc><lastmod>2026-03-27</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <!-- Pages principales -->
+  <url><loc>https://www.hexait.fr</loc><lastmod>2026-03-28</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.hexait.fr/services</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.hexait.fr/projets</loc><lastmod>2026-03-28</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.hexait.fr/contact</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.hexait.fr/a-propos</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.hexait.fr/blog</loc><lastmod>2026-03-28</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <!-- Services individuels -->
+  <url><loc>https://www.hexait.fr/services/developpement-web</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.hexait.fr/services/developpement-saas</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.hexait.fr/services/cloud-devops</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.hexait.fr/services/audit-technique</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.hexait.fr/services/ux-ui-design</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Etudes de cas projets -->
+  <url><loc>https://www.hexait.fr/projets/welyx</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.hexait.fr/projets/oview</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.hexait.fr/projets/stratgen</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Articles de blog -->
+  <url><loc>https://www.hexait.fr/blog/combien-coute-developpement-web-sur-mesure</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.hexait.fr/blog/saas-sur-mesure-vs-no-code</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.hexait.fr/blog/comment-choisir-agence-web-paris</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.hexait.fr/blog/pourquoi-choisir-nextjs</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.hexait.fr/blog/etapes-projet-developpement-logiciel</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.hexait.fr/blog/automatiser-gestion-entreprise-ia</loc><lastmod>2026-03-28</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Pages legales -->
+  <url><loc>https://www.hexait.fr/mentions-legales</loc><lastmod>2026-03-28</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://www.hexait.fr/politique-confidentialite</loc><lastmod>2026-03-28</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://www.hexait.fr/conditions-generales</loc><lastmod>2026-03-28</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://www.hexait.fr/cookies</loc><lastmod>2026-03-28</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>
