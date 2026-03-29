@@ -56,7 +56,8 @@
       "Read(//c/Dev/ProjetsSO/HEXAIT/HexaIT Site/$TEMP/**)",
       "Bash(python3:*)",
       "Bash(echo $TEMP)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "WebFetch(domain:www.hexait.fr)"
     ]
   }
 }
