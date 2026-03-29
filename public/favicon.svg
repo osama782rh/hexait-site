@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="6" fill="#09090B"/>
+  <g fill="none" stroke="#22D3EE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- X mark -->
+    <line x1="10" y1="8" x2="22" y2="24"/>
+    <line x1="22" y1="8" x2="10" y2="24"/>
+    <!-- Diamond top -->
+    <path d="M16 5 L19 8 L16 11 L13 8 Z" fill="#22D3EE" stroke="none"/>
+    <!-- Diamond bottom -->
+    <path d="M16 21 L19 24 L16 27 L13 24 Z" fill="#22D3EE" stroke="none"/>
+  </g>
+</svg>
