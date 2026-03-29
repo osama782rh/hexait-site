@@ -18,11 +18,8 @@ export default function Navbar() {
   const [solid, setSolid] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
-
   useEffect(() => {
-    const t = setTimeout(() => setOpen(false), 0);
-    return () => clearTimeout(t);
+    setOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -107,7 +104,7 @@ export default function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              onClick={() => setTimeout(() => setOpen(false), 100)}
+              onClick={() => setOpen(false)}
               className={`mobile-nav-link text-2xl font-bold py-3 ${
                 isActive
                   ? "text-[var(--accent-light)]"
@@ -120,7 +117,7 @@ export default function Navbar() {
         })}
         <Link
           href="/contact"
-          onClick={() => setTimeout(() => setOpen(false), 100)}
+          onClick={() => setOpen(false)}
           className="mobile-nav-link btn-cta mt-6 text-base px-8 py-3"
         >
           Discuter d&apos;un projet

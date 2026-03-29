@@ -2,12 +2,11 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
-  ArrowRight, Code, Rocket, Wrench, Shield, Lightbulb,
+  ArrowRight, Code, Rocket, Lightbulb,
   CheckCircle2, Clock, Zap, MessageSquare, AlertTriangle,
-  FileSpreadsheet, Puzzle, Timer, Send, Search, Cloud
+  FileSpreadsheet, Timer, Send, Search, Cloud
 } from "lucide-react";
-import { useEffect, useRef, useState, useCallback } from "react";
-import React from 'react';
+import { useEffect, useRef, useState, useCallback, type FormEvent, type RefObject } from "react";
 
 /* ─── Hooks ─── */
 function useRevealOnScroll() {
@@ -26,13 +25,14 @@ function useRevealOnScroll() {
   }, []);
 }
 
-function useTimelineFill(ref: React.RefObject<HTMLElement | null>) {
+function useTimelineFill(ref: RefObject<HTMLElement | null>) {
   useEffect(() => {
     if (!ref.current) return;
     const container = ref.current;
     const fill = container.querySelector<HTMLElement>('.timeline-track-fill');
     const dots = container.querySelectorAll<HTMLElement>('.timeline-dot');
     if (!fill) return;
+    const timers: number[] = [];
 
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -40,19 +40,23 @@ function useTimelineFill(ref: React.RefObject<HTMLElement | null>) {
         /* Animate fill and dots sequentially */
         fill.style.width = '100%';
         dots.forEach((dot, i) => {
-          setTimeout(() => dot.classList.add('active'), 300 + i * 350);
+          const timer = window.setTimeout(() => dot.classList.add('active'), 300 + i * 350);
+          timers.push(timer);
         });
         io.disconnect();
       });
     }, { threshold: 0.3 });
     io.observe(container);
-    return () => io.disconnect();
+    return () => {
+      timers.forEach((timer) => window.clearTimeout(timer));
+      io.disconnect();
+    };
   }, [ref]);
 }
 
 
 function useCountUp(
-  ref: React.RefObject<HTMLElement | null>,
+  ref: RefObject<HTMLElement | null>,
   end: number,
   opts: { duration?: number; decimals?: number } = {}
 ) {
@@ -75,6 +79,21 @@ function useCountUp(
     return () => { io.disconnect(); cancelAnimationFrame(raf); };
   }, [ref, end, duration, decimals]);
 }
+
+const STACK_ICON_BY_TECH: Record<string, string | null> = {
+  React: "react.png",
+  "Next.js": "nextjs.png",
+  TypeScript: "ts.png",
+  "Node.js": "node.png",
+  Python: "python.png",
+  GraphQL: "graphql.png",
+  PostgreSQL: "postgresql.png",
+  MongoDB: "mongodb.png",
+  Redis: "redis.png",
+  Docker: "docker.png",
+  Azure: "azure.png",
+  AWS: null,
+};
 
 
 /* ════════════════════════════════════════
@@ -506,13 +525,21 @@ function StackSection() {
       <div className="marquee-wrap">
         <div className={`marquee-track ${reverse ? 'reverse' : ''}`}>
           {doubled.map((name, i) => (
-            <div key={i} className="marquee-item">
-              <img
-                src={`/images/stack/${name.toLowerCase().replace('.', '').replace(' ', '')}.png`}
-                alt=""
-                aria-hidden="true"
-                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-              />
+            <div key={`${name}-${i}`} className="marquee-item">
+              {STACK_ICON_BY_TECH[name] ? (
+                <img
+                  src={`/images/stack/${STACK_ICON_BY_TECH[name]}`}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <span
+                  aria-hidden="true"
+                  className="inline-block w-2 h-2 rounded-full bg-[var(--accent-light)]/70"
+                />
+              )}
               {name}
             </div>
           ))}
@@ -551,18 +578,16 @@ function StatsSection() {
   const r1 = useRef<HTMLSpanElement>(null);
   const r2 = useRef<HTMLSpanElement>(null);
   const r3 = useRef<HTMLSpanElement>(null);
-  const r4 = useRef<HTMLSpanElement>(null);
 
   useCountUp(r1, 7);
   useCountUp(r2, 48);
   useCountUp(r3, 100);
-  useCountUp(r4, 0);
 
   const stats = [
     { ref: r1, suffix: "j", label: "Pour un premier prototype fonctionnel" },
     { ref: r2, suffix: "h", label: "Délai max pour une proposition chiffrée" },
     { ref: r3, suffix: "%", label: "Du code source vous appartient" },
-    { ref: r4, suffix: "", label: "Projet abandonné en cours de route", prefix: "" },
+    { value: "Inclus", suffix: "", label: "Suivi post-livraison et maintenance corrective" },
   ];
 
   return (
@@ -574,7 +599,8 @@ function StatsSection() {
           {stats.map((s, i) => (
             <div key={i} className={`text-center reveal reveal-delay-${i}`}>
               <div className="text-4xl md:text-5xl font-extrabold" style={{ color: 'var(--accent-light)' }}>
-                <span ref={s.ref}>0</span><span className="text-gradient">{s.suffix}</span>
+                {s.ref ? <span ref={s.ref}>0</span> : <span>{s.value}</span>}
+                {s.suffix && <span className="text-gradient">{s.suffix}</span>}
               </div>
               <p className="mt-3 text-sm" style={{ color: 'var(--text-tertiary)' }}>{s.label}</p>
             </div>
@@ -669,19 +695,58 @@ function ResultsSection() {
 function FinalCTASection() {
   const router = useRouter();
   const [sending, setSending] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (sending) return;
+    setErrorMessage(null);
     setSending(true);
+
     const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = String(formData.get('name') ?? '').trim();
+    const email = String(formData.get('email') ?? '').trim();
+    const message = String(formData.get('message') ?? '').trim();
+
+    if (!name || !email || !message) {
+      setErrorMessage("Merci de renseigner les champs obligatoires.");
+      setSending(false);
+      return;
+    }
+
     const data = {
-      name: (form.elements.namedItem('name') as HTMLInputElement).value,
-      email: (form.elements.namedItem('email') as HTMLInputElement).value,
-      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+      name,
+      email,
+      message,
+      company_website: String(formData.get('company_website') ?? ''),
     };
-    try { await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } catch { /* noop */ }
-    router.push('/thank-you');
-  }, [router]);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        let messageFromApi = "Impossible d'envoyer votre message pour le moment.";
+        try {
+          const payload = (await response.json()) as { error?: string };
+          if (payload.error) messageFromApi = payload.error;
+        } catch {
+          // Ignore non-JSON responses.
+        }
+        throw new Error(messageFromApi);
+      }
+
+      router.push('/thank-you');
+    } catch (error) {
+      const fallback = "L'envoi a échoué. Contactez-nous à contact@hexait.fr.";
+      setErrorMessage(error instanceof Error && error.message ? error.message : fallback);
+      setSending(false);
+    }
+  }, [router, sending]);
 
   return (
     <section className="cta-section">
@@ -727,11 +792,26 @@ function FinalCTASection() {
                 <h3 className="font-display text-lg font-bold text-white">Contact rapide</h3>
                 <div>
                   <label htmlFor="cta-name" className="text-sm" style={{ color: 'var(--text-secondary)' }}>Nom *</label>
-                  <input id="cta-name" name="name" required placeholder="Jean Dupont" className="field mt-1.5" />
+                  <input
+                    id="cta-name"
+                    name="name"
+                    autoComplete="name"
+                    required
+                    placeholder="Jean Dupont"
+                    className="field mt-1.5"
+                  />
                 </div>
                 <div>
                   <label htmlFor="cta-email" className="text-sm" style={{ color: 'var(--text-secondary)' }}>Email *</label>
-                  <input id="cta-email" name="email" type="email" required placeholder="vous@domaine.com" className="field mt-1.5" />
+                  <input
+                    id="cta-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    placeholder="vous@domaine.com"
+                    className="field mt-1.5"
+                  />
                 </div>
                 <div>
                   <label htmlFor="cta-message" className="text-sm" style={{ color: 'var(--text-secondary)' }}>Décrivez votre besoin *</label>
@@ -741,7 +821,33 @@ function FinalCTASection() {
                     className="field mt-1.5"
                   />
                 </div>
-                <button type="submit" disabled={sending} className="btn-cta w-full justify-center gap-2 text-base">
+                <input
+                  type="text"
+                  name="company_website"
+                  autoComplete="off"
+                  tabIndex={-1}
+                  className="hidden"
+                  aria-hidden="true"
+                />
+                {errorMessage && (
+                  <p
+                    role="alert"
+                    className="text-sm px-3 py-2 rounded-lg border"
+                    style={{
+                      color: '#fecaca',
+                      background: 'rgba(220, 38, 38, 0.12)',
+                      borderColor: 'rgba(248, 113, 113, 0.35)',
+                    }}
+                  >
+                    {errorMessage}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  aria-busy={sending}
+                  disabled={sending}
+                  className="btn-cta w-full justify-center gap-2 text-base"
+                >
                   {sending ? "Envoi..." : (<>Envoyer <Send size={16} /></>)}
                 </button>
                 <p className="text-xs text-center" style={{ color: 'var(--text-tertiary)' }}>
